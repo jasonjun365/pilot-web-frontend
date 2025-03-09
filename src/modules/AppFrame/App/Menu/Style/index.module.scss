@@ -1,0 +1,59 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: left;
+  border-right: 1px solid;
+  
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-1);
+      border-color: var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  .exitBeta {
+    width: 155px;
+    height: 36px;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: -0.23px;
+    text-align: left;
+    left: 24px;
+    top: 16px;
+    text-transform: unset;
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-900-m);
+        border: solid 1px var(--#{$mode}-neutral-900-m);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+
+  .exitBetaIcon {
+    margin: 0 auto;
+    top: 12px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        border: solid 2px var(--#{$mode}-neutral-50);
+        color: var(--#{$mode}-neutral-500);
+        path {
+          fill: var(--#{$mode}-neutral-500);
+        }
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+}

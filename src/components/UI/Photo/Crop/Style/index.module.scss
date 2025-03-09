@@ -1,0 +1,45 @@
+.layout {
+  .input {
+    display: none;
+  }
+  .label {
+    display: flex;
+    cursor: pointer;
+  }
+}
+
+.dialogContent {
+  padding: 16px;
+  user-select: none;
+  .canvas {
+
+  }
+  .zoom {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+  }
+  .left {
+    margin-right: 20px;
+  }
+  .right {
+    margin-left: 20px;
+  }
+  .slider {
+    flex-grow: 1;
+  }
+  .btn {
+    :global(.MuiButton-label) {
+      color: white;
+      font-size: 15px;
+      line-height: 20px;
+      text-transform: capitalize;
+    }
+  }
+  .confirm {
+    :global(.MuiButton-label) {
+      border-radius: 32px;
+      padding: 6px 44px;
+    }
+  }
+}

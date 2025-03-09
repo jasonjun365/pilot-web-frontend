@@ -1,0 +1,82 @@
+.dialogPaperRoot {
+  background-image: unset !important;
+  overflow-y: hidden !important;
+}
+
+.backdropRoot {
+  @mixin mode($mode) {
+    &.#{'dark'} {
+      background-color: var(--static-overlay-black-90);
+    }
+    &.#{'light'} {
+      background-color: rgba(0, 0, 0, 0.7); // var(--static-overlay-black-90);
+    }
+  }; @include mode('dark'); @include mode('light');
+}
+
+.dialogTitle {
+  height: 66px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 20px !important;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+      border-bottom: 1px solid var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  .title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 0;
+    font-size: 19px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.26;
+    letter-spacing: -0.45px;
+    text-align: center;
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-900-m);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+}
+
+.dialogContent {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+    }
+  }; @include mode('dark'); @include mode('light');
+}
+
+.dialogActions {
+  height: 68px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px !important;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+      border-top: 1px solid var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

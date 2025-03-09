@@ -1,0 +1,5 @@
+.layout {
+  padding: 0;
+  max-height: calc(100vh - var(--head-height) - 174px);
+  overflow: auto;
+}

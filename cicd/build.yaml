@@ -1,0 +1,59 @@
+.push-image-gcp-dev:
+    stage: build
+    image: docker
+    services:
+      - "docker:dind"
+    # extends: .build-base  # We can have base test before pushing it to Google Artifact Registry
+    variables:
+      CI_REGISTRY_IMAGE: "${GCR_REGISTRY}${GCR_REGISTRY_SLUG_DEV}${APP_NAME}"
+      SERVICE_ACCOUNT_KEY: "${GCR_SERVICE_ACCOUNT_KEY_DEV}"
+    script:
+      - ls -lrt
+      - mkdir -p ~/.docker
+      - echo $SERVICE_ACCOUNT_KEY | base64 -d > ~/.docker/config.json
+      - echo $SERVICE_ACCOUNT_KEY
+      - cat ~/.docker/config.json
+      - docker login -u _json_key --password-stdin https://$GCR_REGISTRY < ~/.docker/config.json
+      - echo "Building Image using $VAR_FILE"
+      - echo "Building Image For $CI_COMMIT_BRANCH Branch"
+      - echo "Building Commit Version $CI_COMMIT_SHORT_SHA"
+      - echo "Building Commit Version $CI_COMMIT_TAG"
+      - docker build --build-arg CI_COMMIT_BRANCH=$CI_COMMIT_BRANCH --build-arg CI_COMMIT_SHORT_SHA=$CI_COMMIT_SHORT_SHA --build-arg VAR_FILE=$VAR_FILE --build-arg CI_COMMIT_TAG=$CI_COMMIT_TAG  -t $CI_REGISTRY_IMAGE:$VAR_FILE-$CI_COMMIT_SHORT_SHA .
+      - docker push $CI_REGISTRY_IMAGE:$VAR_FILE-$CI_COMMIT_SHORT_SHA
+      - >
+        if [[ $CI_COMMIT_TAG =~ ^v\d+?.*$ ]]; then 
+          echo "Tagging & Pushing Image using : $VAR_FILE-$CI_COMMIT_TAG tag"
+          docker tag $CI_REGISTRY_IMAGE:$VAR_FILE-$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$VAR_FILE-$CI_COMMIT_TAG
+          docker push $CI_REGISTRY_IMAGE:$VAR_FILE-$CI_COMMIT_TAG
+        else
+          echo "No Tag Was Provided So Image is pushed using $CI_REGISTRY_IMAGE:$VAR_FILE-$CI_COMMIT_SHORT_SHA tag"
+        fi          
+
+.push-image-gcp-prod:
+    stage: build
+    image: docker
+    services:
+      - "docker:dind"
+    # extends: .build-base  # We can have base test before pushing it to Google Artifact Registry
+    variables:
+      CI_REGISTRY_IMAGE: "${GCR_REGISTRY}${GCR_REGISTRY_SLUG_PROD}${APP_NAME}"
+      SERVICE_ACCOUNT_KEY: "${GCR_SERVICE_ACCOUNT_KEY_PROD}"
+    script:
+      - ls -lrt
+      - mkdir -p ~/.docker
+      - echo $SERVICE_ACCOUNT_KEY | base64 -d > ~/.docker/config.json
+      - docker login -u _json_key --password-stdin https://$GCR_REGISTRY < ~/.docker/config.json
+      - docker build --build-arg CI_COMMIT_BRANCH=$CI_COMMIT_BRANCH --build-arg CI_COMMIT_SHORT_SHA=$CI_COMMIT_SHORT_SHA --build-arg VAR_FILE=$VAR_PROD --build-arg CI_COMMIT_TAG=$CI_COMMIT_TAG -t $CI_REGISTRY_IMAGE:latest .
+      - docker push $CI_REGISTRY_IMAGE:latest
+      # Tag & Push Image with Short Commit Hash
+      - docker tag $CI_REGISTRY_IMAGE:latest $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+      - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA        
+      - >
+        if [[ $CI_COMMIT_TAG =~ ^v\d+?.*$ ]]; then 
+          echo "Tagging & Pushing Image using : $CI_COMMIT_TAG tag"
+          docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+          docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+        else 
+          echo "No Tag Was Provided So Image is pushed using only $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA tag"
+        fi      
+  

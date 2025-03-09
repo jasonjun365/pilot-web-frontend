@@ -1,0 +1,24 @@
+.layout {
+  margin-bottom: 8px;
+  &.close {
+    display: none;
+  }
+  .alert {
+    display: inline-flex;
+  }
+  .msg {
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+  animation: show 0.3s ease;
+}
+
+@keyframes show {
+  from {
+    transform: translateX(-150%); 
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

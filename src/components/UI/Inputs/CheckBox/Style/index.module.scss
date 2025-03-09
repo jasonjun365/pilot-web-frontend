@@ -1,0 +1,36 @@
+.layout {
+  flex-grow: 0;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.31;
+  letter-spacing: -0.31px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  
+  @mixin mode($mode) {
+    &.#{$mode} {
+      color: var(--#{$mode}-neutral-900-m);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  @mixin mode-loading($mode) {
+    &.#{$mode}-loading {
+      cursor: default;
+    }
+  }; @include mode-loading('dark'); @include mode-loading('light');
+
+  @mixin mode-disabled($mode) {
+    &.#{$mode}-disabled {
+      cursor: default;
+      color: var(--#{$mode}-background-bg-4);
+    }
+  }; @include mode-disabled('dark'); @include mode-disabled('light');
+
+  &>*:nth-child(1) {
+    margin-right: 6px;
+  }
+}

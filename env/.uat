@@ -1,0 +1,15 @@
+# Env.
+CUSTOM_ENV=uat
+
+# Basename
+CUSTOM_BASENAME=/
+
+# Base url.
+CUSTOM_IS_MOCK=no
+CUSTOM_BASE_URL=http://localhost:3005
+
+# File upload.
+CUSTOM_MEDIA_UPLOAD=https://abc.com
+
+# File read.
+CUSTOM_MEDIA_READ=https://abc.com

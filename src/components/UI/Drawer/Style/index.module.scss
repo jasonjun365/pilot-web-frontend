@@ -1,0 +1,112 @@
+.layout {
+  position: fixed;
+  right: 0;
+  top: var(--head-height);
+  box-sizing: border-box;
+  height: calc(100vh - var(--head-height));
+  width: var(--chat-width);
+  border-left: 1px solid;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-1);
+      border-color: var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  @mixin mode-open($mode) {
+    &.#{$mode}-open {
+      width: var(--chat-width);
+    }
+  }; @include mode-open('dark'); @include mode-open('light');
+
+  @mixin mode-hide($mode) {
+    &.#{$mode}-hide {
+      width: 0;
+    }
+  }; @include mode-hide('dark'); @include mode-hide('light');
+
+  .drawer-switch {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 64px;
+    right: 0;
+    z-index: 1300;
+    padding: 4px 4px 4px 10px;
+    border-radius: 50% 0 0 50%;
+
+    @mixin mode-special($mode) {
+      &.#{$mode}-special {
+        top: 140px;
+        background-color: var(--#{$mode}-background-bg-1);
+      }
+    }; @include mode-special('dark'); @include mode-special('light');
+
+    .btnClose {
+      background: unset !important;
+      padding: 4px;
+    }
+
+    .btnOpen {
+      background: unset !important;
+      padding: 4px;
+    }
+  }
+}
+
+.drawerRoot {
+  position: relative;
+  width: 100%;
+}
+
+.drawerPaper {
+  width: var(--chat-width);
+  height: calc(100vh - var(--head-height));
+  top: var(--head-height);
+  background: unset;
+  box-shadow: unset;
+  padding-left: 1px;
+}
+
+.tab-layout {
+  width: 100%;
+
+  .tabs-box {
+    border-bottom: 1px solid;
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        border-color: var(--#{$mode}-background-bg-2);
+      }
+    }; @include mode('dark'); @include mode('light');
+
+    .tabs {
+      @mixin mode($mode) {
+        &.#{$mode} {
+          background-color: var(--#{$mode}-background-bg-1);
+        }
+      }; @include mode('dark'); @include mode('light');
+
+      .tab {
+        text-transform: unset;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.36;
+        letter-spacing: -0.15px;
+        min-width: 80px;
+        min-height: 48px;
+        padding: 12px 12px;
+
+        @mixin mode($mode) {
+          &.#{$mode} {
+            color: var(--#{$mode}-neutral-900-m);
+          }
+        }; @include mode('dark'); @include mode('light');
+      }
+    }
+  }
+}

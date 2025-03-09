@@ -1,0 +1,18 @@
+.layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .avatar {
+    // cursor: pointer;
+  }
+  .loadingDiv {
+    display: inline;
+  }
+  .loading,
+  .error {
+    display: none !important;
+  }
+  .loaded {
+    display: block;
+  }
+}

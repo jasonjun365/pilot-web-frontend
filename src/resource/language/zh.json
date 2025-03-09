@@ -1,0 +1,115 @@
+{
+  "label": {
+    "name": "名称",
+    "title": "标题",
+    "description": "描述",
+    "thumbnail": "缩略图",
+    "image": "图像",
+    "required": "必填",
+    "details": "详情",
+    "emoji": "Emoji",
+    "language": "语言",
+    "appearance": "外观",
+    "dark": "黑暗",
+    "light": "亮度",
+    "status": "状况",
+    "date": "日期"
+  },
+  "form": {
+    "auth": {
+      "label": {
+        "username": "Username",
+        "email": "Email",
+        "password": "Password"
+      },
+      "button": {
+        "login": "Login",
+        "submit": "Submit"
+      },
+      "validate": {
+        "required": "Required"
+      }
+    }
+  },
+  "btn": {
+    "edit": "编辑",
+    "delete": "删除",
+    "reset": "重置",
+    "copy": "复制",
+    "close": "关闭",
+    "cancel": "取消",
+    "done": "完成",
+    "send": "发送",
+    "notYet": "还没有",
+    "confirm": "确认",
+    "ban": "禁止",
+    "share": "分享",
+    "clearSelection": "清空选项",
+    "selectAll": "全选"
+  },
+  "title": {
+    "crop": "裁剪"
+  },
+  "tips": {
+    "formValidationTips": {
+      "min": "${label}不能为空。",
+      "max": "${label}不能超过最大字符数。",
+      "url": "${label}不是URL格式。",
+      "required": "${label}必需的"
+    },
+    "uploadPicture": "上传图片",
+    "notFound": "未找到",
+    "thumbnailPreview": "缩略图预览"
+  },
+  "confirm": {
+    "areYouConfirm": "您确认吗？"
+  },
+  "message": {
+    "mustJPGOrPNG": "必须 JPG 或 PNG",
+    "failed": "失败"
+  },
+  "share": {
+    "shareOn": "分享到{{name}}",
+    "shareIn": "分享到{{name}}",
+    "copyLink": "复制链接"
+  },
+  "validate": {
+    "max": "不超过 ${max}字符",
+    "min": "不少于${min}字符",
+    "numMax": "不超过 ${max}",
+    "numMin": "不少于 ${min}",
+    "integer": "必须是整数",
+    "email": "电子邮件不正确",
+    "url": "网址不正确",
+    "required": "是必须的"
+  },
+  "table": {
+    "dataEmpty": "数据为空",
+    "page": {
+      "rowsPerPage": "每页视频数：",
+      "of": "的"
+    }
+  },
+  "menu": {
+    "children": "我的孩子",
+    "tuition": "学费记录",
+    "manage": "管理",
+    "settings": "设置"
+  },
+  "errPage": {
+    "404": "404， 未找到页面！",
+    "empty": "尚未开发！",
+    "permission": "您没有权限！"
+  },
+  "time": {
+    "justNow": "刚刚",
+    "second": "{{s}}秒",
+    "minute": "{{m}}分钟",
+    "hour": "{{h}}小时",
+    "hourMinute": "{{h}}小时{{m}}分鐘"
+  },
+  "version": {
+    "update": "A new version is available",
+    "refresh": "Refresh"
+  }
+}

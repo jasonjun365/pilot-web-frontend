@@ -1,0 +1,74 @@
+.layout {
+  .btn {
+    padding: 8px 40px;
+    border-radius: 52px;
+    height: 36px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: -0.05px;
+    text-transform: initial;
+    color: var(--static-white);
+    path {
+      fill: var(--static-white);
+    }
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        &:global(.Mui-disabled) {
+          color: var(--#{$mode}-neutral-200);
+          background-color: var(--#{$mode}-background-bg-3);
+          path {
+            fill: var(--#{$mode}-neutral-200);
+          }
+        }
+      }
+    }; @include mode('dark'); @include mode('light');
+  
+    @mixin mode-primary($mode) {
+      &.#{$mode}-primary {
+        background-color: var(--#{$mode}-system-blue-500-m);
+      }
+    }; @include mode-primary('dark'); @include mode-primary('light');
+  
+    @mixin mode-secondary($mode) {
+      &.#{$mode}-secondary {
+        background-color: var(--#{$mode}-theme-red-600-m);
+      }
+    }; @include mode-secondary('dark'); @include mode-secondary('light');
+
+    @mixin mode-default($mode) {
+      &.#{$mode}-default {
+        color: var(--#{$mode}-neutral-900-m);
+        background-color: var(--#{$mode}-neutral-100);
+      }
+    }; @include mode-default('dark'); @include mode-default('light');
+
+    &:hover {
+      @mixin mode-primary($mode) {
+        &.#{$mode}-primary {
+          background-color: var(--#{$mode}-system-blue-600);
+        }
+      }; @include mode-primary('dark'); @include mode-primary('light');
+
+      @mixin mode-secondary($mode) {
+        &.#{$mode}-secondary {
+          background-color: var(--#{$mode}-theme-red-700);
+        }
+      }; @include mode-secondary('dark'); @include mode-secondary('light');
+
+      @mixin mode-default($mode) {
+        &.#{$mode}-default {
+          color: var(--#{$mode}-neutral-900-m);
+          background-color: var(--#{$mode}-neutral-200);
+        }
+      }; @include mode-default('dark'); @include mode-default('light');
+    }
+  }
+}

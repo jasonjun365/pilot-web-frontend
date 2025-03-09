@@ -1,0 +1,49 @@
+.th {
+  height: 48px;
+  border-top: 1px solid;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+      border-color: var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+}
+
+.td {
+  flex-grow: 0;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: -0.08px;
+  text-align: left;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      color: var(--#{$mode}-neutral-900-m);
+      background-color: var(--#{$mode}-background-bg-0);
+      border-color: var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+}
+
+.tdHead {
+  height: 34px;
+  gap: 24px;
+  padding: 8px 20px;
+  
+  flex-grow: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.38;
+  letter-spacing: -0.08px;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+      border-color: var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

@@ -1,0 +1,36 @@
+
+.layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+
+  .formRow {
+    padding-bottom: 20px;
+    width: 480px;
+  }
+  .formInformation {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    div {
+      width: 99%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .formActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .to_link {
+    padding-top: 30px;
+  }
+}

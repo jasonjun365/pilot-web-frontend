@@ -1,0 +1,45 @@
+
+$left: 13px;
+.layout {
+  padding-bottom: $left * 2;
+  overflow: hidden;
+  .main {
+    max-width: 300px;
+    align-self: stretch;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 16px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: -10px;
+    position: relative;
+    top: $left;
+    color: var(--static-white);
+  
+    @mixin mode($mode) {
+      &.#{$mode} {
+        background-color: var(--#{$mode}-system-blue-500-m);
+      }
+      &.#{$mode}::before {
+        border-bottom-color: var(--#{$mode}-system-blue-500-m);
+      }
+    }; @include mode('dark'); @include mode('light');
+  
+    &::before {
+      content: '';
+      border: $left solid transparent;
+      position: absolute;
+      top: -$left * 2;
+      left: calc(50% - $left);
+    }
+  
+    .close {
+      gap: 18px;
+      text-align: right;
+      cursor: pointer;
+    }
+  }
+}

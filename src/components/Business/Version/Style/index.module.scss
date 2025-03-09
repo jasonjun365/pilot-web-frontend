@@ -1,0 +1,48 @@
+$right: 16px;
+
+.layout {
+  visibility: hidden;
+  border-radius: 2px;
+  padding: 16px;
+  margin-top: 16px;
+  font-size: 14px;
+  position: fixed;
+  z-index: 9;
+  top: var(--head-height);
+  right: $right;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      border: 1px solid var(--#{$mode}-background-bg-3);
+      background-color: var(--#{$mode}-background-bg-2);
+      color: var(--#{$mode}-neutral-900-m);
+
+      b {
+        color: var(--#{$mode}-system-blue-700);
+      }
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  &.show {
+    visibility: visible;
+    animation: show 0.5s;
+  }
+
+  b {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    right: -$right;
+  }
+  to {
+    opacity: 1;
+    right: $right;
+  }
+}

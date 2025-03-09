@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  width: 100%;
+  height: var(--head-height);
+  padding: 0 24px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid;
+  
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+      border-color: var(--#{$mode}-background-bg-2);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  .logo {
+    :hover {
+      cursor: pointer;
+    }
+  }
+}

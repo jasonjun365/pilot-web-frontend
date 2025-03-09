@@ -1,0 +1,37 @@
+.layout {
+  height: 84px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 20px;
+
+  .left {
+    span {
+      flex-grow: 0;
+      font-size: 20px;
+      font-weight: 900;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.25;
+      letter-spacing: -0.45px;
+      text-align: left;
+
+      @mixin mode($mode) {
+        &.#{$mode} {
+          color: var(--#{$mode}-neutral-900-m);
+        }
+      }; @include mode('dark'); @include mode('light');
+    }
+  }
+  .right {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .btn-box {
+    margin-right: 20px;
+  }
+}

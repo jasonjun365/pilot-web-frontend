@@ -1,0 +1,28 @@
+.layout {
+  height: 68px;
+  align-self: stretch;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 18px;
+  &>* {
+    margin-left: 20px;
+  }
+  &>*:nth-child(1) {
+    margin-left: 0;
+  }
+  .cancel {
+    text-transform: initial;
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-900-m);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+
+  button {
+    height: 32px !important;
+  }
+}

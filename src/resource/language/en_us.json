@@ -1,0 +1,118 @@
+{
+  "label": {
+    "name": "Name",
+    "title": "Title",
+    "description": "Description",
+    "thumbnail": "Thumbnail",
+    "image": "Image",
+    "required": "required",
+    "details": "Details",
+    "emoji": "Emoji",
+    "language": "Language",
+    "appearance": "Appearance",
+    "dark": "Dark",
+    "light": "Light",
+    "status": "Status",
+    "date": "Date"
+  },
+  "form": {
+    "auth": {
+      "label": {
+        "username": "Username",
+        "email": "Email",
+        "password": "Password"
+      },
+      "button": {
+        "login": "Login",
+        "submit": "Submit"
+      },
+      "validate": {
+        "required": "Required"
+      }
+    }
+  },
+  "btn": {
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "reset": "Reset",
+    "copy": "Copy",
+    "close": "Close",
+    "cancel": "Cancel",
+    "done": "Done",
+    "send": "Send",
+    "notYet": "Not Yet",
+    "confirm": "Confirm",
+    "ban": "Ban",
+    "share": "Share",
+    "clearSelection": "Clear selection",
+    "selectAll": "Select all"
+  },
+  "title": {
+    "crop": "Crop"
+  },
+  "tips": {
+    "formValidationTips": {
+      "min": "${label} can not be blank.",
+      "max": "${label} can't be longer than max characters.",
+      "url": "${label} not url format.",
+      "required": "${label} required"
+    },
+    "uploadPicture": "Upload picture",
+    "notFound": "Not Found",
+    "thumbnailPreview": "Thumbnail preview"
+  },
+  "confirm": {
+    "areYouConfirm": "Are you confirm?"
+  },
+  "message": {
+    "mustJPGOrPNG": "Must JPG or PNG",
+    "failed": "Failed"
+  },
+  "share": {
+    "shareOn": "Share on {{name}}",
+    "shareIn": "Share in {{name}}",
+    "copyLink": "Copy Link"
+  },
+  "validate": {
+    "max": "no more than ${max} characters",
+    "min": "no Less than ${min} characters",
+    "numMax": "no more than ${max}",
+    "numMin": "no Less than ${min}",
+    "integer": "must be Integer",
+    "email": "email is incorrect",
+    "url": "url is incorrect",
+    "required": "is required"
+  },
+  "table": {
+    "dataEmpty": "Data Empty",
+    "page": {
+      "rowsPerPage": "Videos per page:",
+      "of": "of"
+    }
+  },
+  "menu": {
+    "children": "Children",
+    "tuition": "Tuition",
+    "manage": "Manage",
+    "settings": "Settings"
+  },
+  "errPage": {
+    "404": "404, Not Found Page!",
+    "empty": "Not developed yet!",
+    "permission": "You don't have permission!"
+  },
+  "time": {
+    "justNow": "just now",
+    "second": "{{s}}s",
+    "minute": "{{m}}m",
+    "hour": "{{h}}h",
+    "hourMinute": "{{h}}h{{m}}m"
+  },
+  "version": {
+    "update": "A new version is available",
+    "refresh": "Refresh"
+  }
+}

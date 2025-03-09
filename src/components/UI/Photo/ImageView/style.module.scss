@@ -1,0 +1,19 @@
+.layout {
+  display: flex;
+  .loadingDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+  }
+  .loading,
+  .error {
+    display: none !important;
+  }
+  .loaded {
+    display: block;
+  }
+  img {
+    // cursor: pointer;
+  }
+}

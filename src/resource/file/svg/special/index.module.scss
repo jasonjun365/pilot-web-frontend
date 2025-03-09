@@ -1,0 +1,24 @@
+.layout {
+  padding: 4px;
+  border-radius: 50%;
+  transition: 0.1s ease;
+
+  &.noPadding {
+    padding: 0;
+  }
+  
+  @mixin mode($mode) {
+    &.#{$mode}-active,
+    &.#{$mode}:hover {
+      cursor: pointer;
+      background-color: var(--#{$mode}-background-bg-3);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  @mixin mode-disabled($mode) {
+    &.#{$mode}-disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+  }; @include mode-disabled('dark'); @include mode-disabled('light');
+}

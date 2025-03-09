@@ -1,0 +1,41 @@
+.layout {
+  align-self: stretch;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 20px;
+  border-top: 1px solid;
+
+  b {
+    font-size: 13px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.38;
+    letter-spacing: -0.08px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  span {
+    width: 1px;
+    height: 18px;
+    margin: 0 6px;
+  }
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+      border-color: var(--#{$mode}-background-bg-2);
+      b {
+        color: var(--#{$mode}-system-blue-500-m);
+      }
+      span {
+        background-color: var(--#{$mode}-background-bg-2);
+      }
+    }
+  }; @include mode('dark'); @include mode('light');
+}

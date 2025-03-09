@@ -1,0 +1,83 @@
+@import '~@/components/UI/AnyPopover/default.module.scss';
+
+.layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 8px 3px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+
+  &:hover {
+    @mixin mode($mode) {
+      &.#{$mode} {
+        background-color: var(--#{$mode}-background-bg-3);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(50vw - 50px);
+
+    .common-name{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+    
+    .nicknameBox {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .nickname {
+        @extend .common-name;
+        height: 19px;
+        flex-grow: 0;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.36;
+        letter-spacing: -0.15px;
+        text-align: right;
+  
+        @mixin mode($mode) {
+          &.#{$mode} {
+            color: var(--#{$mode}-neutral-900-m);
+          }
+        }; @include mode('dark'); @include mode('light');
+      }
+      .icon {
+        margin-left: 2px;
+      }
+    }
+
+    .username {
+      @extend .common-name;
+      height: 18px;
+      flex-grow: 0;
+      font-size: 13px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.38;
+      letter-spacing: -0.08px;
+      text-align: right;
+
+      @mixin mode($mode) {
+        &.#{$mode} {
+          color: var(--#{$mode}-neutral-500);
+        }
+      }; @include mode('dark'); @include mode('light');
+    }
+  }
+
+  .right {
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,71 @@
+.dialog-layout {
+  border-radius: 14px;
+  min-width: 420px;
+  max-width: 480px;
+  padding-bottom: 20px;
+  background-image: unset;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+    }
+  }; @include mode('dark'); @include mode('light');
+
+  .dialog-title {
+    display: flex;
+    justify-content: center;
+    padding: 32px 24px 20px 24px;
+    flex-grow: 0;
+    font-size: 20px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: -0.45px;
+    text-align: center;
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-900-m);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+
+  .dialog-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80px;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.28;
+    letter-spacing: -0.44px;
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-500);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 64px;
+  }
+}
+
+.backdropRoot {
+  @mixin mode($mode) {
+    &.#{'dark'} {
+      background-color: var(--static-overlay-black-90);
+    }
+    &.#{'light'} {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

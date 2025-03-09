@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px 60px;
+  border-radius: 14px;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

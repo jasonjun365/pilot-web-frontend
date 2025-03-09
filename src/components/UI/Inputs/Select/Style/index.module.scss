@@ -1,0 +1,13 @@
+.layout {
+
+}
+
+.selectSvgIcon {
+  margin-top: -6px;
+
+  @mixin mode($mode) {
+    &.#{$mode} {
+      color: var(--#{$mode}-neutral-500);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

@@ -1,0 +1,19 @@
+.layout {
+  $middleWidth: 20px;
+  $uploadBoxWidth: 271px;
+  $imageBoxWidth: calc(100% - $uploadBoxWidth - $middleWidth);
+
+  .imageBox {
+    width: $imageBoxWidth;
+  }
+  .uploadBox {
+    margin-left: $middleWidth;
+    width: $uploadBoxWidth;
+
+    .btn{
+      width: $uploadBoxWidth;
+      height: calc($uploadBoxWidth / 16 * 9);
+      padding: 53px 90px;
+    }
+  }
+}

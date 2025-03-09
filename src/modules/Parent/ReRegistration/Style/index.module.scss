@@ -1,0 +1,9 @@
+.layout {
+  height: 100%;
+  
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

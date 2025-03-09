@@ -1,0 +1,16 @@
+.layout {
+  height: 100%;
+
+
+  .detail {
+    width: 100%;
+    padding:20px;
+    text-align: center;
+  }
+  
+  @mixin mode($mode) {
+    &.#{$mode} {
+      background-color: var(--#{$mode}-background-bg-0);
+    }
+  }; @include mode('dark'); @include mode('light');
+}

@@ -1,0 +1,11 @@
+:root {
+  --head-height: 60px;
+  --menu-width: 256px;
+  --menu-width-small: 64px;
+  --chat-width: 400px;
+  --center-padding: 20px;
+  --center-middle-clear: 32px;
+  --center-left-width: calc((100vw - var(--chat-width) - var(--center-padding) * 2 - var(--menu-width)) * 0.6);
+  --center-left-width-small: calc((100vw - var(--chat-width) - var(--center-padding) * 2 - var(--menu-width-small)) * 0.6);
+  --webcam-bottom-height: 76px;
+}

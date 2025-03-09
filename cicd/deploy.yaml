@@ -1,0 +1,72 @@
+.deploy-to-dev:
+    stage: build
+    image: ubuntu:18.04
+    # extends: .build-base  # We can have base test before pushing it to Google Artifact Registry
+    script:
+      - apt update
+      - apt install git -y
+      - git clone https://$GITOPS_TOKEN_NAME:$GITOPS_TOKEN_SECRET@$GITOPS_REPO_URL
+      - cd helm-charts
+      - ls -lrt
+      - git config --global user.email "$GITOPS_TOKEN_NAME@gettr.com"
+      - git config --global user.name "$GITOPS_TOKEN_NAME"      
+      - echo "Current `sed -n '/repository:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE}`"
+      - echo "Current `sed -n '/tag:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE}`"
+      - echo "Commit Version $CI_COMMIT_SHORT_SHA"
+      - echo "Tag Version $CI_COMMIT_TAG"
+      - >
+        if [[ $CI_COMMIT_TAG =~ ^v\d+?.*$ ]]; then 
+          echo "Modifiying Tag to $VAR_FILE-$CI_COMMIT_TAG"
+          echo "deploy/${APP_NAME}/${DEPLOY_FILE}"
+          sed -i "s/tag:.*$/tag:\ \"$VAR_FILE-$CI_COMMIT_TAG\"/g" deploy/${APP_NAME}/${DEPLOY_FILE}
+          echo "Deploying with This Image Tag `sed -n '/tag:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE}`"
+          git status
+          git add .
+          git commit -m "Changed Image Tag to $VAR_FILE-$CI_COMMIT_TAG in file $DEPLOY_FILE"
+        else
+          echo "Modifiying Tag to $VAR_FILE-$CI_COMMIT_SHORT_SHA"
+          echo "deploy/${APP_NAME}/${DEPLOY_FILE}"
+          sed -i "s/tag:.*$/tag:\ \"$VAR_FILE-$CI_COMMIT_SHORT_SHA\"/g" deploy/${APP_NAME}/${DEPLOY_FILE}  
+          echo "Deploying with This Image Tag `sed -n '/tag:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE}`"
+          git status
+          git add .
+          git commit -m "Changed Image Tag to $VAR_FILE-$CI_COMMIT_SHORT_SHA in file $DEPLOY_FILE"
+        fi
+      - git push https://$GITOPS_TOKEN_NAME:$GITOPS_TOKEN_SECRET@$GITOPS_REPO_URL
+
+
+.deploy-to-prod:
+    stage: build
+    image: ubuntu:18.04
+    # extends: .build-base  # We can have base test before pushing it to Google Artifact Registry
+    script:
+      - apt update
+      - apt install git -y
+      - git clone https://$GITOPS_TOKEN_NAME:$GITOPS_TOKEN_SECRET@$GITOPS_REPO_URL
+      - cd helm-charts
+      - ls -lrt
+      - git config --global user.email "$GITOPS_TOKEN_NAME@gettr.com"
+      - git config --global user.name "$GITOPS_TOKEN_NAME"      
+      - echo "Current `sed -n '/repository:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE_PROD}`"
+      - echo "Current `sed -n '/tag:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE_PROD}`"
+      - echo "Commit Version $CI_COMMIT_SHORT_SHA"
+      - echo "Tag Version $CI_COMMIT_TAG"
+      - >
+        if [[ $CI_COMMIT_TAG =~ ^v\d+?.*$ ]]; then 
+          echo "Modifiying Tag to $CI_COMMIT_TAG"
+          echo "deploy/${APP_NAME}/${DEPLOY_FILE_PROD}"
+          sed -i "s/tag:.*$/tag:\ \"$CI_COMMIT_TAG\"/g" deploy/${APP_NAME}/${DEPLOY_FILE_PROD}
+          echo "Deploying with This Image Tag `sed -n '/tag:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE_PROD}`"
+          git status
+          git add .
+          git commit -m "Changed Image Tag to $CI_COMMIT_TAG in file $DEPLOY_FILE_PROD"
+        else
+          echo "Modifiying Tag to $CI_COMMIT_SHORT_SHA"
+          echo "deploy/${APP_NAME}/${DEPLOY_FILE_PROD}"
+          sed -i "s/tag:.*$/tag:\ \"$CI_COMMIT_SHORT_SHA\"/g" deploy/${APP_NAME}/${DEPLOY_FILE_PROD}  
+          echo "Deploying with This Image Tag `sed -n '/tag:.*$/,+p' deploy/${APP_NAME}/${DEPLOY_FILE_PROD}`"
+          git status
+          git add .
+          git commit -m "Changed Image Tag to $CI_COMMIT_SHORT_SHA in file $DEPLOY_FILE_PROD"
+        fi
+      - git push https://$GITOPS_TOKEN_NAME:$GITOPS_TOKEN_SECRET@$GITOPS_REPO_URL

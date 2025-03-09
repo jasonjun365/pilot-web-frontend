@@ -1,0 +1,112 @@
+.common {
+  @mixin mode($mode) {
+    &.#{$mode} {
+      color: var(--#{$mode}-neutral-900-m);
+      background-color: var(--#{$mode}-background-bg-1);
+    }
+  }; @include mode('dark'); @include mode('light');
+}
+
+.back-label {
+  @extend .common;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  width: 250px;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid;
+
+  svg {
+    margin-right: 15px;
+  }
+}
+
+.menu {
+  @extend .common;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  //width: 250px;
+  min-width: 130px;
+  min-height: 50px;
+  cursor: pointer;
+
+  .loading {
+    width: 100%;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 15px;
+    }
+    .label {
+      word-wrap: break-word;
+      word-break: break-all;
+      margin-right: 15px;
+    }
+    &.active {
+      @mixin mode($mode) {
+        &.#{$mode} {
+          color: var(--#{$mode}-system-blue-700);
+
+          svg {
+            path {
+              fill: var(--#{$mode}-system-blue-700);
+            }
+          }
+        }
+      }; @include mode('dark'); @include mode('light');
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    @mixin mode($mode) {
+      &.#{$mode} {
+        background-color: var(--#{$mode}-background-bg-3);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+}
+
+.tips {
+  @extend .common;
+  padding: 10px 20px;
+  width: 250px;
+  min-height: 50px;
+  font-size: 14px;
+}
+
+.btn {
+  @extend .common;
+  padding: 0 20px;
+  width: 250px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  &.active {
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-900-m);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+  &:hover {
+    @mixin mode($mode) {
+      &.#{$mode} {
+        background-color: var(--#{$mode}-background-bg-3);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+}
