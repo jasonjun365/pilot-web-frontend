@@ -15,10 +15,12 @@ const View: React.FC<PropTypes> = ({ getMixinStyle }) => {
 
   const handleGoSignin = () => {
     window.location.href = '/signin';
+    // navigate('/signin');
   };
 
   const handleGoSignup = () => {
     window.location.href = '/signup';
+    // navigate('/signup');
   };
 
   return (

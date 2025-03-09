@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useMemo} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import ViewStylePropTypes from '@/libs/types/ViewStyle';
 import {Field, Form, Formik} from 'formik';
 import {Button, FormLabel, Input as MuiInput} from '@mui/material';
@@ -33,6 +34,7 @@ const initialValues: Values = {
 
 const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state: any) => state.basic.user);
 
@@ -41,9 +43,9 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
   };
 
   const validationSchema = useMemo(() => Yup.object().shape({
-    username: Yup.string().trim().required(t('form.auth.validate.required')),
-    email: Yup.string().trim().required(t('form.auth.validate.required')),
-    password: Yup.string().trim().required(t('form.auth.validate.required')),
+    // username: Yup.string().trim().required(t('form.auth.validate.required')),
+    // email: Yup.string().trim().required(t('form.auth.validate.required')),
+    // password: Yup.string().trim().required(t('form.auth.validate.required')),
   }), [t]);
 
   const onSubmit = useCallback((values: any) => {
@@ -52,13 +54,14 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
   }, []);
 
   const navToSignin = useCallback(() => {
+    alert('Sign up successfully.');
     // navigate('/signin', { replace: true });
     window.location.href = '/signin';
   }, []);
 
   useEffect(() => {
     if (states.signupStatus) {
-      window.location.href = '/signin';
+      navToSignin();
     }
   }, [states.signupStatus]);
 

@@ -35,8 +35,8 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
   const dispatch = useDispatch();
 
   const validationSchema = useMemo(() => Yup.object().shape({
-    username: Yup.string().trim().required(t('form.auth.validate.required')),
-    password: Yup.string().trim().required(t('form.auth.validate.required')),
+    // username: Yup.string().trim().required(t('form.auth.validate.required')),
+    // password: Yup.string().trim().required(t('form.auth.validate.required')),
   }), [t]);
 
   const onSubmit = useCallback((values: any) => {

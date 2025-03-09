@@ -13,7 +13,6 @@ const getSpecialPage = (allPath: string[], value: string) => {
     // @ts-ignore
     const pattern = new URLPattern({ pathname: path });
     const result = pattern.exec({ pathname: value });
-
     if (result) {
       // if matched path
       hasPage = true;
@@ -36,6 +35,10 @@ interface PropTypes { // states
 
 const RenderPage: React.FC<PropTypes> = ({ allPath, value }) => {
   const {hasPage, SpecialPage, params} = getSpecialPage(allPath, value);
+
+  console.log('hasPage', hasPage);
+  console.log('SpecialPage', SpecialPage);
+  console.log('params', params);
 
   if (SpecialPage) {
     if (hasPage)

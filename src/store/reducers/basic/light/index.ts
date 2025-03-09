@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import space from './space';
 
-const lightStatus = localStorage.getItem('light') ? localStorage.getItem('light') !== 'false' : false;
+const lightStatus = localStorage.getItem('light') ? localStorage.getItem('light') !== 'false' : true;
 
 const {
   actions
