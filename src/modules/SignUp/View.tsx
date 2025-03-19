@@ -2,9 +2,9 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import ViewStylePropTypes from '@/libs/types/ViewStyle';
-import {Field, Form, Formik} from 'formik';
-import {Button, FormLabel, Input as MuiInput} from '@mui/material';
-import {Input} from '@/components/UI';
+import {Field, Form, Formik, ErrorMessage} from 'formik';
+import {Button, FormLabel, Input} from '@mui/material';
+// import {Input} from '@/components/UI';
 import * as Yup from 'yup';
 import {useTranslation} from 'react-i18next';
 import Actions from '@/store/actions';
@@ -43,9 +43,9 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
   };
 
   const validationSchema = useMemo(() => Yup.object().shape({
-    // username: Yup.string().trim().required(t('form.auth.validate.required')),
-    // email: Yup.string().trim().required(t('form.auth.validate.required')),
-    // password: Yup.string().trim().required(t('form.auth.validate.required')),
+    username: Yup.string().trim().required(t('form.auth.validate.required')),
+    email: Yup.string().trim().required(t('form.auth.validate.required')),
+    password: Yup.string().trim().required(t('form.auth.validate.required')),
   }), [t]);
 
   const onSubmit = useCallback((values: any) => {
@@ -85,6 +85,7 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                   label="Username"
                   component={Input}
                 />
+                <ErrorMessage name="username" />
               </div>
               <div className={getMixinStyle('formRow')}>
                 <FormLabel>Email</FormLabel>
@@ -94,6 +95,7 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                   label="Email"
                   component={Input}
                 />
+                <ErrorMessage name="email" />
               </div>
               <div className={getMixinStyle('formRow')}>
                 <FormLabel>Password</FormLabel>
@@ -104,6 +106,7 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                   type="password"
                   component={Input}
                 />
+                <ErrorMessage name="password" />
               </div>
               <div className={getMixinStyle('formActions')}>
                 <Button
@@ -115,7 +118,7 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                 >{t('form.auth.button.submit')}</Button>
               </div>
 
-              <Field name="role" type='hidden'/>
+              <Field name="role" type='hidden' value="parent"/>
             </Form>
           )}
         </Formik>
