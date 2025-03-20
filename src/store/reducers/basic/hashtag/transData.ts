@@ -3,9 +3,9 @@ interface PropTypes {
 }
 
 const transData: PropTypes = (data, initialData) => {
-  let result = data?.data?.list || initialData;
+  let result = data?.data?.records || initialData;
 
-  if (data?.data?.list) {
+  if (data?.data?.records) {
     result = result.map((it: string) => ({
       name: it,
     }));

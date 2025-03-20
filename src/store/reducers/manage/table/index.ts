@@ -59,7 +59,7 @@ const data = createReducer(
       state.selects.data[initialState.selects.now] = initialState.selects.data[initialState.selects.now];
     })
     .addCase(thunks.getData.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      state.data = transData(action.payload.result.data.list, state.data);
+      state.data = transData(action.payload.result.data.records, state.data);
       state.loading = false;
       state.count = action.payload.result.aux.total;
     })

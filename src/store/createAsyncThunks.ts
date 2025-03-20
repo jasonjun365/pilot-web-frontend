@@ -49,21 +49,21 @@ const createAsyncThunks: PropTypes = (name, thunks) => {
 
           delete ajaxCancelMap[name + n[0]];
 
-          const rc = response.data.rc;
+          const code = response.data.code;
 
-          if (rc !== 'OK') {
-            if (rc === 401) {
+          if (code !== 0) {
+            if (code === 401) {
               window.location.href = '/';
             } else {
-              const title = 'rc: ' + rc;
-              const msg = response.data.message || 'unknown error';
+              const title = 'code: ' + code;
+              const msg = response.data.msg || 'unknown error';
               store.dispatch({ type: 'basic/toast/addData', payload: { title, msg, type: 'error', time: 0 }});
               return rejectWithValue(response.data);
             }
           }
 
-          if (response.data.message) {
-            const msg = response.data.message;
+          if (response.data.msg) {
+            const msg = response.data.msg;
             store.dispatch({ type: 'basic/toast/addData', payload: { msg, type: 'info' }});
           }
           console.log('response.data', response.data);

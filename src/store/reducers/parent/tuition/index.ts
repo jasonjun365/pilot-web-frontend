@@ -62,7 +62,7 @@ const data = createReducer(
     .addCase(thunks.getData.fulfilled, (state, action: PayloadAction<any, any, any>) => {
       console.log('Tuition List: ', action.payload.data);
       state.count = action.payload.data.total;
-      state.data = action.payload.data.list;
+      state.data = action.payload.data.records;
       state.loading = false;
     })
     .addCase(thunks.getData.rejected, (state) => {

@@ -3,8 +3,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import ViewStylePropTypes from '@/libs/types/ViewStyle';
 import {Field, Form, Formik, ErrorMessage} from 'formik';
-import {Button, FormLabel, Input} from '@mui/material';
-// import {Input} from '@/components/UI';
+import {Button, FormLabel} from '@mui/material';
+import {Input} from '@/components/UI';
 import * as Yup from 'yup';
 import {useTranslation} from 'react-i18next';
 import Actions from '@/store/actions';
@@ -85,7 +85,6 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                   label="Username"
                   component={Input}
                 />
-                <ErrorMessage name="username" />
               </div>
               <div className={getMixinStyle('formRow')}>
                 <FormLabel>Email</FormLabel>
@@ -95,7 +94,6 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                   label="Email"
                   component={Input}
                 />
-                <ErrorMessage name="email" />
               </div>
               <div className={getMixinStyle('formRow')}>
                 <FormLabel>Password</FormLabel>
@@ -106,7 +104,6 @@ const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
                   type="password"
                   component={Input}
                 />
-                <ErrorMessage name="password" />
               </div>
               <div className={getMixinStyle('formActions')}>
                 <Button

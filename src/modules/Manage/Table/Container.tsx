@@ -42,7 +42,7 @@ const Special: React.FC<PropTypes> = ({ Index, props }) => {
       .then((response: any) => {
         const params = {
           content: {
-            streamIds: response.result.data.list.filter((it: any) => it.sid).map((it: any) => it.sid)
+            streamIds: response.result.data.records.filter((it: any) => it.sid).map((it: any) => it.sid)
           }
         };
 
