@@ -1,22 +1,18 @@
-import React, {useCallback, useMemo} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Formik, Field, Form, ErrorMessage} from 'formik';
-import { Button, FormLabel } from '@mui/material';
-import { Input } from '@/components/UI';
-import * as Yup from 'yup';
-import {useNavigate} from 'react-router-dom';
+import React from 'react';
+import {useForm} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
+import { Button } from '@mui/material';
 import ViewStylePropTypes from '@/libs/types/ViewStyle';
 import {useTranslation} from 'react-i18next';
 import Actions from '@/store/actions';
 import Head from './Head';
-
-
-const {
-  thunks: userThunks
-} = Actions.basic.user;
+import CircularLoading from '@/components/UI/Loading/Circular';
+import Input2 from '@/components/UI/Form/Input2';
 
 interface PropTypes extends ViewStylePropTypes {
-
+  loading: boolean,
+  handleSubmit: (values: any) => void
 }
 
 interface Values {
@@ -29,69 +25,84 @@ const initialValues: Values = {
   password: '',
 };
 
-const View: React.FC<PropTypes> = ({getMixinStyle, ...props}) => {
+const View: React.FC<PropTypes> = ({loading, handleSubmit, getMixinStyle, ...props}) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const validationSchema = useMemo(() => Yup.object().shape({
-    username: Yup.string().trim().required(t('form.auth.validate.required')),
-    password: Yup.string().trim().required(t('form.auth.validate.required')),
-  }), [t]);
+  const schema = yup.object({
+    username: yup.string()
+      .label('Username')
+      .trim()
+      .required(t('form.auth.validate.required')),
+    password: yup.string()
+      .label('Password')
+      .trim()
+      .required(t('form.auth.validate.required')),
+  });
+  const {
+    control,
+    handleSubmit: hookSubmit,
+    reset,
+    getValues,
+    setValue,
+    trigger,
+    formState: { errors }
+  } = useForm<any>({ resolver: yupResolver(schema) });
 
-  const onSubmit = useCallback((values: any) => {
-    console.log('values', values);
-    dispatch(userThunks.signin({params: values}));
-  }, []);
+  const formProps = { errors, hookSubmit, reset, trigger };
+  const itemProps = { control, errors, schema, getValues, setValue, trigger, initialData: initialValues };
+  const isError = Object.keys(errors).length > 0;
 
-  const navToSignup = useCallback(() => {
-    // navigate('/signup', { replace: true });
-    window.location.href = '/signup';
-  }, []);
+  const onSubmit = async (values: any) => {
+    console.log('login: ', values);
+    handleSubmit(values);
+  };
 
   return (
     <>
       <Head/>
       <div className={getMixinStyle('layout')}>
         <div><h3>Login</h3></div>
-        <Formik
-          validationSchema={validationSchema}
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-        >
-          {({errors, touched}) => (
-            <Form>
-              <div className={getMixinStyle('formRow')} key="username">
-                <FormLabel>Username</FormLabel>
-                <Field
-                  placeholer="Please enter your username."
-                  name="username"
-                  label="Username"
-                  component={Input}
-                />
+        <form>
+          <CircularLoading mask={true} loading={loading}>
+            <div className={getMixinStyle('formRow')}>
+              <div className={getMixinStyle('label', ['title'])}>
+                Username
               </div>
-              <div className={getMixinStyle('formRow')} key="password">
-                <FormLabel>Password</FormLabel>
-                <Field
-                  placeholer="Please enter your password."
-                  name="password"
-                  label="Password"
-                  type="password"
-                  component={Input}
-                />
+              <Input2
+                {...itemProps}
+                placeholder="Please enter your username."
+                name='username'
+                variant="outlined"
+                fullWidth
+                autoFocus={false}
+              />
+            </div>
+            <div className={getMixinStyle('formRow')}>
+              <div className={getMixinStyle('label', ['title'])}>
+                Password
               </div>
-              <div className={getMixinStyle('formActions')} key="btn-submit">
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  disableElevation
-                >{t('form.auth.button.login')}</Button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+              <Input2
+                {...itemProps}
+                placeholder="Please enter your password."
+                name='password'
+                variant="outlined"
+                fullWidth
+                autoFocus={false}
+                type="password"
+              />
+            </div>
+            <div className={getMixinStyle('formActions')} key="btn-submit">
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                type="submit"
+                disableElevation
+                onClick={hookSubmit(onSubmit)}
+              >{t('form.auth.button.login')}</Button>
+            </div>
+          </CircularLoading>
+        </form>
       </div>
     </>
   );

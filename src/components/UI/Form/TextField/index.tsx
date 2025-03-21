@@ -3,6 +3,7 @@ import {
   TextField,
   FilledTextFieldProps,
   Typography,
+  FormLabel,
   FormControl,
 } from '@mui/material';
 import { FieldInputProps, FormikProps, ErrorMessage } from 'formik';
@@ -20,13 +21,7 @@ const FormTextField: React.FC<IProps> = ({ form, field, label, ...props }) => {
   return (
     <FormControl fullWidth>
       {label && (
-        <Typography
-          variant="h4"
-          component="h4"
-          sx={{ fontSize: 13, color: 'Text.TEXT_PRIMARY', mb: 1 }}
-        >
-          {label}
-        </Typography>
+        <FormLabel>{label}</FormLabel>
       )}
       <TextField
         fullWidth

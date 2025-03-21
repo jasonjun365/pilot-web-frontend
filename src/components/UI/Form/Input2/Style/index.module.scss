@@ -1,0 +1,37 @@
+.layout {
+  position: relative;
+  &>*>* {
+    padding: 10px !important;
+    textarea {
+      flex-grow: 1;
+      font-size: 15px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.33;
+      letter-spacing: -0.23px;
+      text-align: left;
+
+      @mixin mode($mode) {
+        &.#{$mode} {
+          color: var(--#{$mode}-neutral-500);
+        }
+      }; @include mode('dark'); @include mode('light');
+    }
+  }
+
+  .notchedOutline {
+    @mixin mode($mode) {
+      &.#{$mode} {
+        border-color: var(--#{$mode}-background-bg-2);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+  .helpTextRoot {
+    position: absolute;
+    bottom: 2px;
+    left: 8px;
+    padding: 0 !important;
+    margin: 0;
+  }
+}
