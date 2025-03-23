@@ -6,7 +6,7 @@ CUSTOM_BASENAME=/
 
 # Base url.
 CUSTOM_IS_MOCK=no
-CUSTOM_BASE_URL=http://localhost:3005
+CUSTOM_BASE_URL=https://pilot-web-service.csse.cc
 
 # File upload.
 CUSTOM_MEDIA_UPLOAD=https://abc.com
