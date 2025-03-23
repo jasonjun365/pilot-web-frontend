@@ -9,9 +9,9 @@ const StyleWrap: React.FC<any> = (props) => {
   );
 };
 
-const ContainerWrap: React.FC<any> = () => {
+const ContainerWrap: React.FC<any> = (props) => {
   return (
-    <Container Index={StyleWrap} />
+    <Container {...props} Index={StyleWrap} />
   );
 };
 

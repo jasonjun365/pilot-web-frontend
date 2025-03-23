@@ -14,8 +14,10 @@ export interface IStudent {
   name: string,
   email: string,
   address: string,
-  parent_name: string,
-  parent_email: string
+  parentName: string,
+  parentEmail: string,
+  primaryParentId: string,
+  enabled: number
 }
 
 export interface IProgram {

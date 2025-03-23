@@ -3,7 +3,7 @@ import name from './name';
 
 export default createAsyncThunks(name, [[
   'getData', {
-    url: '/api/v1/parent/children/list',
+    url: '/api/v1/app/student/list',
     method: 'get',
   }],
 ]);

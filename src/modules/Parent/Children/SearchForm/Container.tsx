@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Container from '@/modules/Parent/Children/Table/Container';
 import Actions from '@/store/actions';
 
 const {
@@ -17,7 +16,7 @@ interface PropTypes { // methods
 }
 
 const Special: React.FC<PropTypes> = ({ Index, handleGetData }) => {
-  const thisState = useSelector((state: any) => state.manage.table);
+  const thisState = useSelector((state: any) => state.parent.children.table);
   const getDataName = 'getData';
   const getStatusName = 'getStatus';
   
@@ -30,7 +29,8 @@ const Special: React.FC<PropTypes> = ({ Index, handleGetData }) => {
 
   const methods = {
     handleGetData: (params: any) => {
-      handleGetData(params);
+      // TODO do later
+      // handleGetData(params);
     }
   };
   
@@ -42,10 +42,4 @@ const Special: React.FC<PropTypes> = ({ Index, handleGetData }) => {
   );
 };
 
-const ContainerWrap: React.FC<any> = (props) => {
-  return (
-    <Container props={props} View={Special} />
-  );
-};
-
-export default ContainerWrap;
+export default Special;

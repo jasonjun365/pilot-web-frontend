@@ -1,6 +1,9 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
 import space from './space';
 import {IStudent} from '@/libs/types/entities';
+import {getUserInfo} from '@/libs/utils/localstorage';
+
+const userInfo = getUserInfo();
 
 const {actions, thunks} = space;
 
@@ -25,8 +28,10 @@ const initialState: PropTypes = {
       name: '',
       email: '',
       address: '',
-      parent_name: '',
-      parent_email: ''
+      parentName: '',
+      parentEmail: '',
+      primaryParentId: userInfo.userId,
+      enabled: 1
     }
   }
 };
@@ -45,8 +50,10 @@ const data = createReducer(
           name: '',
           email: '',
           address: '',
-          parent_name: '',
-          parent_email: ''
+          parentName: '',
+          parentEmail: '',
+          primaryParentId: userInfo.userId,
+          enabled: 1
         };
       }
     })
@@ -56,6 +63,7 @@ const data = createReducer(
     })
     .addCase(actions.setEditFormData, (state, action: PayloadAction<IStudent>) => {
       state.editForm.data = {...state.editForm.data, ...action.payload};
+      state.editForm.data.primaryParentId = userInfo.userId;
       console.log('setEditFormData: ', state.editForm.data);
     })
     .addCase(thunks.addStudent.pending, (state) => {

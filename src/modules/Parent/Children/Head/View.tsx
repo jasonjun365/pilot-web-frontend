@@ -20,6 +20,7 @@ const View: React.FC<PropTypes> = ({ getMixinStyle }) => {
 
   const handleAddChildClick = () => {
     dispatch(editFormActions.setEditFormTitle({title: 'Add Child', type: 'NEW'}));
+    dispatch(editFormActions.setEditFormData({}));
     dispatch(editFormActions.setEditFormOpen(true));
   };
   

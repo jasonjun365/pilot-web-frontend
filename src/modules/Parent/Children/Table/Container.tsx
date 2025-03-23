@@ -41,11 +41,13 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
     loading: thisState.loading,
     count: thisState.count,
     selects: thisState.selects,
+    reload: thisState.reload,
     thunkNames: [thisActionName + getDataName, thisActionName + getStatusName],
   };
 
   const getData = (params: any) => {
     dispatch(thisThunks[getDataName]({ params }));
+    dispatch(thisActions.setTableReload(false));
   };
 
   const methods = {
@@ -53,6 +55,7 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
       getData(thisState.initialSearchForm);
     },
     handleGetData: (params: any) => {
+      console.log('handleGetData', params);
       getData(params);
     },
     handleSetSelectValue: (params: any) => {
@@ -67,21 +70,28 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
       navigate('/re-registration?sid=' + studentId, { replace: true });
     },
     handleDeleteFormShow: () => {
-      // const params = {
-      //   postIds: thisState.selects.data['remove'],
-      // };
-      //
-      // dispatch(deleteFormActions.reset());
-      // dispatch(deleteFormActions.setData(params));
-      // dispatch(deleteFormActions.show(t('btn.delete')));
+      const params = {
+        postIds: thisState.selects.data['remove'],
+      };
+
+      dispatch(deleteFormActions.reset());
+      dispatch(deleteFormActions.setData(params));
+      dispatch(deleteFormActions.show(t('btn.delete')));
     },
   };
 
   useEffect(() => {
-    if (!thisState.loading) {
+    console.log('Reload Changed', states.reload);
+    if (states.reload) {
+      methods.handleGetData(states.searchForm);
+    }
+  }, [states.reload]);
+
+  useEffect(() => {
+    if (!thisState.loading && states.searchForm?.parentId) {
       methods.handleGetInitialData();
     }
-  }, []);
+  }, [states.searchForm]);
 
   return (
     <View

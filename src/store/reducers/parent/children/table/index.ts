@@ -2,6 +2,9 @@ import { createReducer, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 import space from './space';
 import {IStudent} from '@/libs/types/entities';
+import {getUserInfo} from '@/libs/utils/localstorage';
+
+const userInfo = getUserInfo();
 
 const {
   actions,
@@ -19,12 +22,13 @@ interface PropTypes {
     data: {
       [t: string]: string[]
     }
-  }
+  },
+  reload: boolean
 }
 
 const initialSearchForm = {
-  phrase: '',
-  sort: 'recent',
+  keyword: '',
+  parentId: userInfo.userId,
   page: 1,
   size: 10,
 };
@@ -40,11 +44,18 @@ const initialState: PropTypes = {
     data: {
       remove: []
     }
-  }
+  },
+  reload: false,
 };
 const data = createReducer(
   initialState,
   builder => { builder
+    .addCase(actions.setSearchForm, (state, action: PayloadAction<any, any>) => {
+      state.searchForm = {...state.searchForm, ...action.payload};
+    })
+    .addCase(actions.setTableReload, (state, action: PayloadAction<boolean>) => {
+      state.reload = action.payload;
+    })
     .addCase(actions.setSelectValue, (state, action: PayloadAction<any, any>) => {
       state.selects.data[action.payload.mode] = action.payload.value;
     })
@@ -60,8 +71,8 @@ const data = createReducer(
         targetItem.name = action.payload.name;
         targetItem.email = action.payload.email;
         targetItem.address = action.payload.address;
-        targetItem.parent_name = action.payload.parent_name;
-        targetItem.parent_email = action.payload.parent_email;
+        targetItem.parentName = action.payload.parentName;
+        targetItem.parentEmail = action.payload.parentEmail;
         state.data = newList;
       }
     })

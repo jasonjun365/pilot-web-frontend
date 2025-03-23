@@ -5,11 +5,11 @@ import ViewStylePropTypes from '@/libs/types/ViewStyle';
 import * as yup from 'yup';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-// import Text from '@/common/formItem/Text';
-import Text from '@/components/UI/Form/Text';
+import Input2 from '@/components/UI/Form/Input2';
+import Select2 from '@/components/UI/Form/Select2';
 import DialogForm from '@/components/UI/Dialog/DialogForm';
-import PureButton from '@/components/UI/Button/PureButton';
 import {IStudent} from '@/libs/types/entities';
+
 
 interface PropTypes extends ViewStylePropTypes {
   data: IStudent | null
@@ -41,11 +41,11 @@ const View: React.FC<PropTypes> = ({ handleDelete, getMixinStyle, ...props }) =>
       .label('Address')
       .trim()
       .required('Required'),
-    parent_name: yup.string()
+    parentName: yup.string()
       .label('Parent Name')
       .trim()
       .required('Required'),
-    parent_email: yup.string()
+    parentEmail: yup.string()
       .label('Parent Email')
       .trim()
       .required('Required'),
@@ -69,72 +69,72 @@ const View: React.FC<PropTypes> = ({ handleDelete, getMixinStyle, ...props }) =>
         <div className={getMixinStyle('label', ['title'])}>
           Name
         </div>
-        <Text
+        <Input2
           {...itemProps}
           placeholder="Please enter student name."
           name='name'
           variant="outlined"
-          multiline
-          minRows={1}
           fullWidth
-          maxTextSize={64}
-          autoFocus={false}
+          autoFocus={true}
         />
         <div className={getMixinStyle('label', ['title'])}>
           Email
         </div>
-        <Text
+        <Input2
           {...itemProps}
           placeholder="Please enter student email."
           name='email'
           variant="outlined"
-          multiline
-          minRows={1}
           fullWidth
-          maxTextSize={256}
           autoFocus={false}
         />
         <div className={getMixinStyle('label', ['title'])}>
           Address
         </div>
-        <Text
+        <Input2
           {...itemProps}
           placeholder="Please enter student address."
           name='address'
           variant="outlined"
-          multiline
-          minRows={1}
           fullWidth
-          maxTextSize={256}
           autoFocus={false}
         />
         <div className={getMixinStyle('label', ['title'])}>
           Parent Name
         </div>
-        <Text
+        <Input2
           {...itemProps}
           placeholder="Please enter student's parent name."
-          name='parent_name'
+          name='parentName'
           variant="outlined"
-          multiline
-          minRows={1}
           fullWidth
-          maxTextSize={64}
           autoFocus={false}
         />
         <div className={getMixinStyle('label', ['title'])}>
           Parent Email
         </div>
-        <Text
+        <Input2
           {...itemProps}
           placeholder="Please enter student's parent email."
-          name='parent_email'
+          name='parentEmail'
           variant="outlined"
-          multiline
-          minRows={1}
           fullWidth
-          maxTextSize={256}
           autoFocus={false}
+        />
+        <div className={getMixinStyle('label', ['title'])}>
+          Status
+        </div>
+        <Select2
+          {...itemProps}
+          placeholder="Please select status."
+          name='enabled'
+          variant="outlined"
+          fullWidth
+          autoFocus={false}
+          data={[
+            {key: 1, value: 1, label: 'Enable'},
+            {key: 0, value: 0, label: 'Disable'},
+          ]}
         />
       </div>
     </DialogForm>

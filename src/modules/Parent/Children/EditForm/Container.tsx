@@ -45,15 +45,13 @@ const Special: React.FC<PropTypes> = ({ View }) => {
       const copy_data = JSON.parse(JSON.stringify(data));
 
       if (editFormState.editForm?.type === 'NEW') {
-        dispatch(editFormThunks.addStudent({params: data})).then(unwrapResult).then((response: any) => {
+        dispatch(editFormThunks.addStudent({data: {...states.data, ...data}})).then(unwrapResult).then((response: any) => {
           console.log('editFormThunks.addStudent: ', response);
-          if (response?.data) {
-            dispatch(tableActions.appendDataToList(response.data));
-          }
+          dispatch(tableActions.setTableReload(true));
           methods.handleClose();
         });
       } else if (editFormState.editForm?.type === 'EDIT') {
-        dispatch(editFormThunks.editStudent({params: states.data})).then(unwrapResult).then((response: any) => {
+        dispatch(editFormThunks.editStudent({data: {...states.data, ...data}})).then(unwrapResult).then((response: any) => {
           console.log('editFormThunks.editStudent: ', response);
           dispatch(tableActions.updateDataToList({...copy_data, ...{id: states.data.id}}));
           methods.handleClose();

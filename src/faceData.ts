@@ -6,24 +6,24 @@ export const myChildrenList = [
     name: 'Jake Smith',
     email: 'jakesmith@gmail.com',
     address: 'Calgary, AB',
-    parent_name: 'John Smith',
-    parent_email: 'johndSmith@gmail.com',
+    parentName: 'John Smith',
+    parentEmail: 'johndSmith@gmail.com',
   },
   {
     id: 101,
     name: 'Cat Smith',
     email: 'catsmith@gmail.com',
     address: 'Calgary, AB',
-    parent_name: 'John Smith',
-    parent_email: 'johndSmith@gmail.com',
+    parentName: 'John Smith',
+    parentEmail: 'johndSmith@gmail.com',
   },
   {
     id: 102,
     name: 'Fish Smith',
     email: 'fishsmith@gmail.com',
     address: 'Calgary, AB',
-    parent_name: 'John Smith',
-    parent_email: 'johndSmith@gmail.com',
+    parentName: 'John Smith',
+    parentEmail: 'johndSmith@gmail.com',
   },
 ];
 
@@ -32,8 +32,8 @@ export const randomChildInfo = {
   name: faker.person.fullName(),
   email: faker.internet.email(),
   address: faker.location.streetAddress({ useFullAddress: true }),
-  parent_name: faker.person.fullName(),
-  parent_email: faker.internet.email(),
+  parentName: faker.person.fullName(),
+  parentEmail: faker.internet.email(),
 };
 
 export const programList = [
@@ -149,8 +149,8 @@ export const tuitionList = [
       name: 'Student Smith',
       email: 'studentsmith@gmail.com',
       address: 'Calgary, AB',
-      parent_name: 'Parent Smith',
-      parent_email: 'parentsmith@gmail.com',
+      parentName: 'Parent Smith',
+      parentEmail: 'parentsmith@gmail.com',
     },
     program_id: faker.number.int({min: 1000, max: 100000}),
     program: {
@@ -210,8 +210,8 @@ export const tuitionList = [
       name: 'Student Smith',
       email: 'studentsmith@gmail.com',
       address: 'Calgary, AB',
-      parent_name: 'Parent Smith',
-      parent_email: 'parentsmith@gmail.com',
+      parentName: 'Parent Smith',
+      parentEmail: 'parentsmith@gmail.com',
     },
     program_id: faker.number.int({min: 1000, max: 100000}),
     program: {

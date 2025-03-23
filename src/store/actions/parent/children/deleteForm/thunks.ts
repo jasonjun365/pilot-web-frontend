@@ -3,7 +3,7 @@ import name from './name';
 
 export default createAsyncThunks(name, [[
   'submit', {
-    url: ({ cid }) => `/api/v1/parent/children/${cid}`,
+    url: '/api/v1/app/student/delete',
     method: 'delete',
   }]
 ]);

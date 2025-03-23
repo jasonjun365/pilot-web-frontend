@@ -84,7 +84,7 @@ const View: React.FC<PropTypes> = ({
       }
     },
     {
-      name: 'parent_name',
+      name: 'parentName',
       align: 'left',
       width: 260,
       label: 'Parent',
@@ -93,7 +93,7 @@ const View: React.FC<PropTypes> = ({
           <div className={getMixinStyle('column')}>
             <div className={getMixinStyle('right')}>
               <div className={getMixinStyle('title')}>{val}</div>
-              <div className={getMixinStyle('title')}>{record.parent_email}</div>
+              <div className={getMixinStyle('title')}>{record.parentEmail}</div>
             </div>
           </div>
         );
