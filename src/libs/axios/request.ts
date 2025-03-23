@@ -40,6 +40,6 @@ export default async ({ url, method='get', params, data, isJson=true, onUploadPr
     cancelToken
   };
 
-  console.log('RequestConf: ', requestConf);
+  console.log('==== RequestConf: ', requestConf);
   return await axios(requestConf);
 };
