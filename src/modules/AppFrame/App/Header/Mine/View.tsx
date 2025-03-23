@@ -37,7 +37,7 @@ const View: React.FC<PropTypes> = ({ data, lightOpen, changeLightOpen, logoutHan
                 <EmojiTrans text={data.username} />
               </div>
               <div className={getMixinStyle('icon')}>
-                {data.role && (
+                {data.roles && (
                   <VerificationIcon />
                 )}
               </div>

@@ -10,14 +10,14 @@ import Head from './Head';
 import CircularLoading from '@/components/UI/Loading/Circular';
 import Input2 from '@/components/UI/Form/Input2';
 
-interface PropTypes extends ViewStylePropTypes {
-  loading: boolean,
-  handleSubmit: (values: any) => void
-}
-
 interface Values {
   username: string;
   password: string;
+}
+
+interface PropTypes extends ViewStylePropTypes {
+  loading: boolean,
+  handleSubmit: (values: Values) => void
 }
 
 const initialValues: Values = {

@@ -28,8 +28,17 @@ const Special: React.FC<PropTypes> = ({ View }) => {
 
   const methods = {
     handleSubmit: (values: any) => {
-      console.log('values', values);
-      dispatch(userThunks.signin({params: values}));
+      const {username, password} = values;
+      const bodyFormData = new FormData();
+      bodyFormData.append('username', username);
+      bodyFormData.append('password', password);
+      console.log('login: ', bodyFormData);
+      dispatch(userThunks.login({
+        data: bodyFormData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      }));
     },
   };
   

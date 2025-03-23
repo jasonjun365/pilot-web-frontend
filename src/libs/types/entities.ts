@@ -1,9 +1,12 @@
+import {IRole} from '@/libs/types/user';
+
 export interface IUser {
-  id: number,
+  userId: string,
   username: string,
   email: string,
-  role: string,
-  enabled: boolean,
+  password: string,
+  roleIdList: number[],
+  status: number,
 }
 
 export interface IStudent {

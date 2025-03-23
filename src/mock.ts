@@ -15,7 +15,7 @@ mock.onGet('/api/v1/u/info/abc').reply(200, {
     enabled: true,
   }
 });
-mock.onPost('/api/v1/u/signin').reply(200, {
+mock.onPost('/api/v1/u/login').reply(200, {
   code: 0,
   msg: 'Successfully signin',
   data: {
@@ -27,7 +27,7 @@ mock.onPost('/api/v1/u/signin').reply(200, {
     token: 'dkjfewksdjfuwhruehjkjsdhfjaos'
   }
 });
-mock.onPost('/api/v1/u/signup').reply(200, {
+mock.onPost('/api/v1/u/save').reply(200, {
   code: 0,
   msg: 'Successfully signup',
   data: null
@@ -60,3 +60,8 @@ mock.onGet(/\/api\/v1\/parent\/tuition\/list?.*/).reply(200, {
     total: tuitionList.length,
   }
 });
+
+
+if (process.env.CUSTOM_IS_MOCK === 'yes') {
+  mock.restore();
+}

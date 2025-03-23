@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '@/store';
 import Root from '@/modules/AppFrame/Root';
-import './mock';
+// import './mock';
 
 // @ts-ignore
 ReactDOM.createRoot(document.getElementById('root')).render(

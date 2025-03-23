@@ -1,7 +1,7 @@
 import { createReducer, PayloadAction } from '@reduxjs/toolkit';
 import {getUserInfo, setUserInfo} from '@/libs/utils/localstorage';
 import space from './space';
-import {IUserSession} from '@/libs/types/user';
+import {IUserSession, IRole} from '@/libs/types/user';
 
 const userInfo = getUserInfo();
 
@@ -14,7 +14,7 @@ interface PropTypes {
   data: IUserSession | null
   loading: boolean
   isLogin: boolean
-  role: string
+  roles: string[]
   signupStatus: boolean
 }
 
@@ -22,7 +22,7 @@ const initialState: PropTypes = {
   data: userInfo,
   loading: false,
   isLogin: false,
-  role: 'anonymous',
+  roles: ['anonymous'],
   signupStatus: false,
 };
 // removeUserSession
@@ -37,47 +37,63 @@ const data = createReducer(
       if (action.payload?.token) {
         state.data = action.payload;
         state.isLogin = true;
-        state.role = action.payload.role || 'anonymous';
+        state.roles = action.payload?.roles ? action.payload.roles.map((item: IRole) => item.roleName) : ['anonymous'];
       } else {
         state.data = null;
         state.isLogin = false;
-        state.role = 'anonymous';
+        state.roles = ['anonymous'];
       }
     })
     .addCase(actions.removeUserSession, (state) => {
       console.log('removeUserSession:');
       state.data = null;
       state.isLogin = false;
-      state.role = 'anonymous';
+      state.roles = ['anonymous'];
     })
     .addCase(thunks.getData.pending, (state) => {
       state.loading = true;
     })
     .addCase(thunks.getData.fulfilled, (state, action: PayloadAction<any>) => {
-      console.log(action.payload.data);
+      console.log('getData', action.payload.data);
       if (action.payload.data) {
         state.data = action.payload.data;
         state.isLogin = true;
-        state.role = action.payload.data.role || 'anonymous';
+        state.roles = action.payload.data?.roles ? action.payload.data.roles.map((item: IRole) => item.roleName) : ['anonymous'];
       }
       state.loading = false;
     })
     .addCase(thunks.getData.rejected, (state) => {
       state.loading = false;
     })
-    .addCase(thunks.signin.pending, (state) => {
+    .addCase(thunks.login.pending, (state) => {
       state.loading = true;
     })
-    .addCase(thunks.signin.fulfilled, (state, action: PayloadAction<any, any, any>) => {
+    .addCase(thunks.login.fulfilled, (state, action: PayloadAction<any, any, any>) => {
       if (action.payload.data) {
-        state.data = action.payload.data;
-        state.isLogin = true;
-        state.role = action.payload.data.role || 'anonymous';
         setUserInfo(action.payload.data);
+        state.data = action.payload.data;
+        state.roles = action.payload.data?.roles ? action.payload.data?.roles.map((item: IRole) => item.roleName) : ['anonymous'];
+        state.isLogin = true;
       }
       state.loading = false;
     })
-    .addCase(thunks.signin.rejected, (state) => {
+    .addCase(thunks.login.rejected, (state) => {
+      state.loading = false;
+    })
+    .addCase(thunks.logout.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(thunks.logout.fulfilled, (state, action: PayloadAction<any, any, any>) => {
+      // TODO
+      // if (action.payload.data) {
+      //   state.data = action.payload.data;
+      //   state.isLogin = true;
+      //   state.role = action.payload.data.role || 'anonymous';
+      //   setUserInfo(action.payload.data);
+      // }
+      state.loading = false;
+    })
+    .addCase(thunks.logout.rejected, (state) => {
       state.loading = false;
     })
     .addCase(thunks.signup.pending, (state) => {

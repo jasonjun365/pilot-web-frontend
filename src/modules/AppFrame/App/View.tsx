@@ -17,18 +17,20 @@ const View: React.FC<PropTypes> = ({ getMixinStyle }) => {
   const states = {
     isLogin: userState.isLogin,
     loading: userState.loading,
-    role: userState.role,
+    roles: userState.roles,
   };
 
   useEffect(() => {
     if (states.isLogin) {
-      if (states.role === 'parent') {
+      if (states.roles?.includes('Administrator')) {
+        navigate('/manage/user', { replace: true });
+      } else if (states.roles?.includes('Parent')) {
         navigate('/children', { replace: true });
       } else {
         // navigate('/', { replace: true });
       }
     }
-  }, [states.role, states.isLogin]);
+  }, [states.roles, states.isLogin]);
 
   return (
     <>

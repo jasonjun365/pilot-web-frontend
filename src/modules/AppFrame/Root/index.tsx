@@ -27,7 +27,7 @@ const Root: React.FC = () => {
   const states = {
     isLogin: userState.isLogin,
     loading: userState.loading,
-    role: userState.role,
+    roles: userState.roles,
   };
 
   useEffect(() => {
@@ -35,8 +35,8 @@ const Root: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const filterMenuData = getFilterMenuDate(states.role);
-    console.log('Role: ', states.role);
+    const filterMenuData = getFilterMenuDate(states.roles);
+    console.log('Role: ', states.roles);
     console.log('Menu: ', filterMenuData);
     if (filterMenuData.length) {
       dispatch(menuActions.setData(filterMenuData));
@@ -44,7 +44,7 @@ const Root: React.FC = () => {
       const msg = t('tips.notFound');
       dispatch({ type: 'basic/toast/addData', payload: { msg, type: 'error', time: 0 }});
     }
-  }, [states.role, states.isLogin]);
+  }, [states.roles, states.isLogin]);
 
   useEffect(() => {
     if (location.pathname === '/index.html') {

@@ -7,12 +7,16 @@ export default createAsyncThunks(name, [[
     url: ({ username }) => `/api/v1/u/info/${username}`,
     method: 'get',
   }], [
-  'signin', {
-    url: '/api/v1/u/signin',
+  'login', {
+    url: '/api/v1/u/login',
+    method: 'post',
+  }], [
+  'logout', {
+    url: '/api/v1/u/logout',
     method: 'post',
   }], [
   'signup', {
-    url: '/api/v1/u/signup',
+    url: '/api/v1/u/save',
     method: 'post',
   }]
 ]);

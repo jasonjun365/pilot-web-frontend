@@ -23,26 +23,24 @@ const createAsyncThunks: PropTypes = (name, thunks) => {
     [n[0]]: createAsyncThunk(
       name + n[0],
       async (params: any, { rejectWithValue }) => {
-        let combineParams = {
-          ...n[1].params,
-          ...params?.params,
-        };
-
         try {
           const cancelTokenSource = axios.CancelToken.source();
-
           ajaxCancelMap[name + n[0]] = cancelTokenSource.cancel;
 
-          const response: any = await request({
+          const requestConf = {
             // @ts-ignore
             url: n[1].url.constructor === Function && params.urlParams ? n[1].url(params.urlParams) : n[1].url,
             method: n[1].method,
-            isJson: n[1].isJson,
-            params: Object.keys(combineParams).length && combineParams,
+            params: params?.params,
+            data: params?.data,
+            onUploadProgress: params?.onUploadProgress,
+            headers: params?.headers,
+            extraHeaders: params?.extraHeaders,
             cancelToken: cancelTokenSource.token,
-          });
-
-          console.log('response', response);
+          };
+          console.log('==== Before request: ', requestConf);
+          const response: any = await request(requestConf);
+          console.log('==== After request: ', response);
           if (params?.localParams) {
             response.localParams = params.localParams;
           }

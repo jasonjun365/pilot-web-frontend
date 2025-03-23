@@ -1,8 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import table from './table';
-import deleteForm from './deleteForm';
+import user from './user';
 
 export default combineReducers({
-  table,
-  deleteForm,
+  user,
 });

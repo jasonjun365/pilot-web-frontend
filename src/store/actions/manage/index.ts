@@ -1,7 +1,5 @@
-import table from './table';
-import deleteForm from './deleteForm';
+import user from './user';
 
 export default {
-  table,
-  deleteForm
+  user,
 };

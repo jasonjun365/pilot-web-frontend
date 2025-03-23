@@ -1,10 +1,10 @@
-import menuData, {} from '@/route/menu'; // MenuMapPath
+import menuData, {} from '@/route/menu';
 
 interface PropTypes {
-  (role: string): any
+  (roles: string[]): any
 }
 
-const getFilterMenuDate: PropTypes = (role) => {
+const getFilterMenuDate: PropTypes = (roles: string[]) => {
   // const filterChannel = Object.keys(channelTypes).reduce((p: any, n: any) => ({
   //   ...p,
   //   [MenuMapPath[n]]: Boolean(channelTypes[n].length)
@@ -18,8 +18,11 @@ const getFilterMenuDate: PropTypes = (role) => {
   //     filterChannel[it] = true;
   //   });
   // }
-
-  return menuData.filter((it: any) => it.roles.includes(role));
+  let menus:any[] = [];
+  roles.forEach((role) => {
+    menus = [...menus, ...menuData.filter((it: any) => it.roles.includes(role))];
+  });
+  return menus; // menuData.filter((it: any) => it.roles.includes(role));
 };
 
 export default getFilterMenuDate;

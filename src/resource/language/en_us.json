@@ -94,6 +94,7 @@
     }
   },
   "menu": {
+    "manageUser": "User Manage",
     "children": "Children",
     "tuition": "Tuition",
     "manage": "Manage",

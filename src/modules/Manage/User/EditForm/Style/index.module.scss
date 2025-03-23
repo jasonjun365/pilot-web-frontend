@@ -1,0 +1,41 @@
+.layout {
+  width: 420px;
+  padding-bottom: 20px;
+
+  .label {
+    flex-grow: 0;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: -0.23px;
+    text-align: left;
+    margin: 10px 0 8px;
+    position: relative;
+
+    @mixin mode($mode) {
+      &.#{$mode} {
+        color: var(--#{$mode}-neutral-500);
+      }
+    }; @include mode('dark'); @include mode('light');
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    height: 20px;
+
+    svg {
+      margin-left: 6px;
+    }
+  }
+}
+
+.btnDelete {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  height: 32px;
+  border-radius: 20px;
+}

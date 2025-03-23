@@ -1,8 +1,18 @@
-export interface IUserSession {
+export interface IRole {
   id: number,
+  userId: string,
+  roleId: number,
+  username: string,
+  roleName: string
+}
+
+export interface IUserSession {
+  userId: number,
   username: string,
   email: string,
-  role: string,
-  enabled: boolean,
+  realName: string,
+  photo: string,
+  roles: IRole[],
+  status: number,
   token: string
 }

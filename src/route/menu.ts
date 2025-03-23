@@ -3,7 +3,7 @@ const menuData = [{
   name: 'home',
   path: '/',
   show: false,
-  roles: ['administrator', 'teacher', 'parent', 'anonymous'],
+  roles: ['Administrator', 'Teacher', 'Parent', 'anonymous'],
 }, {
   icon: 'Profile',
   name: 'signin',
@@ -18,46 +18,46 @@ const menuData = [{
   roles: ['anonymous']
 }, {
   icon: 'Profile',
-  name: 'manage',
-  path: '/manage',
+  name: 'manageUser',
+  path: '/manage/user',
   show: true,
-  roles: ['administrator', 'teacher']
+  roles: ['Administrator']
 }, {
   icon: 'Profile',
   name: 'children',
   path: '/children',
   show: true,
-  roles: ['parent']
+  roles: ['Parent']
 }, {
   icon: 'Profile',
   name: 'reRegistration',
   path: '/re-registration',
   show: false,
-  roles: ['parent']
+  roles: ['Parent']
 }, {
   icon: 'Profile',
   name: 'order',
   path: '/order',
   show: false,
-  roles: ['parent']
+  roles: ['Parent']
 }, {
   icon: 'Profile',
   name: 'withdrawal',
   path: '/withdrawal',
   show: false,
-  roles: ['parent']
+  roles: ['Parent']
 }, {
   icon: 'Profile',
   name: 'payment',
   path: '/payment',
   show: false,
-  roles: ['parent']
+  roles: ['Parent']
 }, {
   icon: 'NavSettings',
   name: 'tuition',
   path: '/tuition',
   show: true,
-  roles: ['parent']
+  roles: ['Parent']
 }];
 
 export default menuData;
@@ -69,7 +69,7 @@ export default menuData;
 
 // export const MenuMapPath: any = {
 //   home: NavMenus.home.path,
-//   signin: NavMenus.signin.path,
+//   signin: NavMenus.login.path,
 //   signup: NavMenus.signup.path,
 //   manage: NavMenus.manage.path,
 // };

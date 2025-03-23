@@ -6,7 +6,7 @@ import Actions from '@/store/actions';
 
 const {
   name: thisActionName
-} = Actions.manage.table;
+} = Actions.parent.children.table;
 
 interface PropTypes { // states
   Index: React.FC<any>

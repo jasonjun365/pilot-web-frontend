@@ -5,8 +5,8 @@ CUSTOM_ENV=dev
 CUSTOM_BASENAME=/
 
 # Base url.
-CUSTOM_IS_MOCK=yes
-CUSTOM_BASE_URL=http://localhost:3005
+CUSTOM_IS_MOCK=no
+CUSTOM_BASE_URL=http://localhost:8080
 
 # File upload.
 CUSTOM_MEDIA_UPLOAD=https://abc.com

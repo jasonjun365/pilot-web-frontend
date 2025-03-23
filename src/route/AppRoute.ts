@@ -3,7 +3,7 @@ import React from 'react';
 const Home = React.lazy(() => import('@/modules/Home'));
 const SignIn = React.lazy(() => import('@/modules/SignIn'));
 const SignUp = React.lazy(() => import('@/modules/SignUp'));
-const Manage = React.lazy(() => import('@/modules/Manage'));
+const ManageUser = React.lazy(() => import('@/modules/Manage/User'));
 const Children = React.lazy(() => import('@/modules/Parent/Children'));
 const ReRegistration = React.lazy(() => import('@/modules/Parent/ReRegistration'));
 const Order = React.lazy(() => import('@/modules/Parent/Order'));
@@ -16,7 +16,7 @@ export default {
   '/': Home,
   '/signin': SignIn,
   '/signup': SignUp,
-  '/manage': Manage,
+  '/manage/user': ManageUser,
   '/children': Children,
   '/re-registration': ReRegistration,
   '/order': Order,
