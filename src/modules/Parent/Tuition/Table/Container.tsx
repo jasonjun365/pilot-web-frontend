@@ -20,6 +20,9 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userState = useSelector((state: any) => ({
+    data: state.basic.user.data
+  }));
   const thisState = useSelector((state: any) => state.parent.tuition);
   const getDataName = 'getData';
   const getStatusName = 'getStatus';
@@ -34,15 +37,18 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
   };
 
   const getData = (params: any) => {
-    dispatch(thisThunks[getDataName]({ params }));
+    dispatch(thisThunks.getTuitionList({ params }));
   };
 
   const methods = {
     handleGetInitialData: () => {
-      getData(thisState.initialSearchForm);
+      getData({...thisState.initialSearchForm, ...{parentId: userState.data.userId}});
     },
     handleGetData: (params: any) => {
-      getData(params);
+      getData({...params, ...{parentId: userState.data.userId}});
+    },
+    navToOrderDetailPage: (oid: string) => {
+      navigate('/order?oid=' + oid, { replace: true });
     },
     handleSetSelectValue: (params: any) => {
       dispatch(thisActions.setSelectValue(params));

@@ -5,6 +5,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Actions from '@/store/actions';
 
 const {
+  actions: menuActions,
+} = Actions.basic.menu;
+
+const {
   actions: thisActions,
   thunks: thisThunks,
 } = Actions.parent.payment;
@@ -20,24 +24,26 @@ interface PropTypes { // methods
 const ContainerWrap: React.FC<PropTypes> = ({ View }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const _sid: any = searchParams.get('sid') || 0;
   const userState = useSelector((state: any) => ({
     data: state.basic.user.data
   }));
+  const thisState = useSelector((state: any) => ({
+    orderDetail: state.parent.order.orderDetail,
+  }));
 
   const states = {
-    userData: userState.data
+    orderDetail: thisState.orderDetail,
   };
 
   const methods = {
     handleSubmit: () => {
       alert('Pay successfully!');
       navigate('/tuition', { replace: true });
+      dispatch(menuActions.removeTab('/payment'));
     },
     handleCancel: () => {
-      navigate('/children', { replace: true });
+      navigate('/tuition', { replace: true });
+      dispatch(menuActions.removeTab('/payment'));
     },
   };
 

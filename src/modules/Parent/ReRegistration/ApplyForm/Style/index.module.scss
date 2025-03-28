@@ -8,8 +8,15 @@
   height: 100%;
 
   .formRow {
+    display: flex;
+    flex-direction: column;
     padding-bottom: 20px;
     width: 480px;
+  }
+  .formActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .formInformation {
     display: flex;
@@ -24,11 +31,6 @@
       justify-content: space-between;
       align-items: center;
     }
-  }
-  .formActions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
   .to_link {
     padding-top: 30px;

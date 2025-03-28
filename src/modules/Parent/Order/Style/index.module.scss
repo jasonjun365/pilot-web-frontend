@@ -1,11 +1,10 @@
 .layout {
   height: 100%;
 
-
   .detail {
     width: 100%;
     padding:20px;
-    text-align: center;
+    text-align: left;
   }
   
   @mixin mode($mode) {

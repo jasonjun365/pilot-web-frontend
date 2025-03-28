@@ -5,7 +5,6 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { useSelector, useDispatch } from 'react-redux';
 import Actions from '@/store/actions';
 import {IStudent} from '@/libs/types/entities';
-import {getUserInfo} from '@/libs/utils/localstorage';
 
 
 const {
@@ -47,13 +46,7 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
   };
 
   const getData = (params: any) => {
-    const userInfo = getUserInfo();
-    dispatch(thisThunks.getData({
-      params,
-      headers: {
-        'token': userInfo?.token || ''
-      }
-    }));
+    dispatch(thisThunks.getData({params}));
     dispatch(thisActions.setTableReload(false));
   };
 
@@ -88,7 +81,6 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
   };
 
   useEffect(() => {
-    console.log('Reload Changed', states.reload);
     if (states.reload) {
       methods.handleGetData(states.searchForm);
     }

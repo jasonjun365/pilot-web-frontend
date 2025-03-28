@@ -1,11 +1,18 @@
 import React from 'react';
 import Style from './Style';
 import View from './View';
+import Container from './Container';
 
-const Special: React.FC<any> = (props) => {
+const StyleWrap: React.FC<any> = (props) => {
   return (
     <Style {...props} View={View} />
   );
 };
 
-export default Special;
+const ContainerWrap: React.FC<any> = (props) => {
+  return (
+    <Container {...props} View={StyleWrap} />
+  );
+};
+
+export default ContainerWrap;

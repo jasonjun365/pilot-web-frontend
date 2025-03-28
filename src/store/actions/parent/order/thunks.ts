@@ -3,11 +3,11 @@ import name from './name';
 
 export default createAsyncThunks(name, [[
   'getOrder', {
-    url: ({ oid }) => `/api/v1/order/${oid}`,
+    url: ({ oid }) => `/api/v1/app/order/${oid}`,
     method: 'get',
   }], [
   'getOrderList', {
-    url: '/api/v1/order',
+    url: '/api/v1/app/order',
     method: 'get',
   }]
 ]);

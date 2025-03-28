@@ -23,7 +23,7 @@ interface PropTypes {
 }
 
 const initialSearchForm = {
-  phrase: '',
+  keyword: '',
   sort: 'recent',
   page: 1,
   size: 10,
@@ -51,7 +51,7 @@ const data = createReducer(
     .addCase(actions.setSelectValue, (state, action: PayloadAction<any, any>) => {
       state.selects.data[action.payload.mode] = action.payload.value;
     })
-    .addCase(thunks.getData.pending, (state, action: PayloadAction<any, any, any>) => {
+    .addCase(thunks.getTuitionList.pending, (state, action: PayloadAction<any, any, any>) => {
       const params = action.meta.arg.params;
       Object.keys(params).forEach((t: any) => {
         state.searchForm[t] = params[t];
@@ -59,13 +59,13 @@ const data = createReducer(
       state.loading = true;
       state.selects.data[initialState.selects.now] = initialState.selects.data[initialState.selects.now];
     })
-    .addCase(thunks.getData.fulfilled, (state, action: PayloadAction<any, any, any>) => {
+    .addCase(thunks.getTuitionList.fulfilled, (state, action: PayloadAction<any, any, any>) => {
       console.log('Tuition List: ', action.payload.data);
       state.count = action.payload.data.total;
       state.data = action.payload.data.records;
       state.loading = false;
     })
-    .addCase(thunks.getData.rejected, (state) => {
+    .addCase(thunks.getTuitionList.rejected, (state) => {
       state.loading = false;
     });
   }

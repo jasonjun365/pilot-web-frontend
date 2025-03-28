@@ -36,10 +36,6 @@ interface PropTypes { // states
 const RenderPage: React.FC<PropTypes> = ({ allPath, value }) => {
   const {hasPage, SpecialPage, params} = getSpecialPage(allPath, value);
 
-  console.log('hasPage', hasPage);
-  console.log('SpecialPage', SpecialPage);
-  console.log('params', params);
-
   if (SpecialPage) {
     if (hasPage)
       if (params)

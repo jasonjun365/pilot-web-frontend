@@ -3,13 +3,8 @@ import name from './name';
 
 export default createActions(name, [
   'setLoading',
+  'setPathname',
   'setConfirmDialog',
-  'setStudentsData',
-  'setProgramsData',
-  'setActivitiesData',
-  'setStudentOptionData',
-  'setProgramOptionData',
-  'setActivityOptionData',
-  'setFormInitialValues',
   'setFormData',
+  'resetFormData',
 ]);

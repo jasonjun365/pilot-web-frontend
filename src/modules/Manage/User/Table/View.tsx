@@ -40,7 +40,7 @@ const View: React.FC<PropTypes> = ({
       name: 'username',
       align: 'left',
       width: 260,
-      label: 'Name', // t('label.status')
+      label: 'Name',
       render: (val, record) => {
         return (
           <div className={getMixinStyle('column')}>

@@ -25,14 +25,14 @@ interface PropTypes { // methods
   hookSubmit: (v?: any, n?: any) => any
   trigger: (v?: any) => any
   handleSubmit: (v: any) => void
-  handleClose: () => void
+  handleClose: (type?: string) => void
 }
 
 const DialogForm: React.FC<PropTypes> = ({ errors, open, maxWidth='xs', openReset=true, reset, trigger, getMixinStyle, ...props }) => {
   const { i18n } = useTranslation();
 
   const onClose = () => {
-    !props.loading && props.handleClose();
+    !props.loading && props.handleClose('dialogEvent');
   };
 
   useEffect(() => {

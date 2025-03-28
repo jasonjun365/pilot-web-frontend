@@ -10,8 +10,8 @@ export { ajaxCancelMap };
 interface AjaxParams {
   url: string | ((v: any) => string)
   method?: 'get' | 'post' | 'delete' | 'put'
-  isJson?: boolean
   params?: any
+  data?: any
 }
 
 interface PropTypes {
@@ -27,9 +27,19 @@ const createAsyncThunks: PropTypes = (name, thunks) => {
           const cancelTokenSource = axios.CancelToken.source();
           ajaxCancelMap[name + n[0]] = cancelTokenSource.cancel;
 
-          const requestConf = {
+          // prepare request url
+          // n[1].url.constructor === Function && params.urlParams ? n[1].url(params.urlParams) : n[1].url,
+          let _requestUrl:any = '';
+          if (n[1].url.constructor === Function) {
             // @ts-ignore
-            url: n[1].url.constructor === Function && params.urlParams ? n[1].url(params.urlParams) : n[1].url,
+            _requestUrl = n[1].url(params.urlParams);
+          } else {
+            _requestUrl = n[1].url;
+          }
+
+          // prepare request config
+          const requestConf = {
+            url: _requestUrl,
             method: n[1].method,
             params: params?.params,
             data: params?.data,

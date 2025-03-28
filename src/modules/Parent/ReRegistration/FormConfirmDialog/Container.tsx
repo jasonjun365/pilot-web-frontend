@@ -7,9 +7,17 @@ import _ from 'lodash';
 import Actions from '@/store/actions';
 
 const {
+  actions: menuActions,
+} = Actions.basic.menu;
+
+const {
   actions: thisActions,
   thunks: thisThunks,
 } = Actions.parent.reRegistration;
+
+const {
+  actions: orderActions,
+} = Actions.parent.order;
 
 interface PropTypes { // states
   View: React.FC<any>
@@ -30,19 +38,36 @@ const Special: React.FC<PropTypes> = ({ View, handleGetData }) => {
     title: thisState.formConfirm.title,
     open: thisState.formConfirm.open,
     loading: thisState.loading,
+    pathname: thisState.pathname,
   };
 
   const methods = {
     handleSubmit: (params: any) => {
-      console.log('handleSubmit:', params);
-      // TODO call api for create  a tuition record and a order record, than return a order object, than set order detail to store
-      // close confirmation dialog and redirect to Order page
-      dispatch(thisActions.setConfirmDialog({title: '', open: false}));
-      navigate('/order?oid=' + 120, { replace: true });
+      // Step 3 - call api for create  a tuition record and an order record, then return an order object, than set order detail to store
+      const postData = {...states.data, ...{dataStatus: 'Progress'}};
+      dispatch(thisThunks.postTuition({data: postData})).then(unwrapResult).then((response: any) => {
+        // Step 4 - after api return success, redirect to order page
+        console.log('handleSubmit response:', response);
+        if (response.code === 0) {
+          dispatch(orderActions.setCurrentTuition(response.data));
+          dispatch(thisActions.setConfirmDialog({title: '', open: false}));
+          navigate('/order?oid=' + response.data.order.id, { replace: true });
+          dispatch(thisActions.resetFormData());
+          dispatch(menuActions.removeTab(states.pathname));
+        }
+      });
     },
-    handleClose: () => {
+    handleClose: (type?: string) => {
+      console.log('======-----0000', type);
+      if (type === 'dialogEvent') {
+        dispatch(thisActions.resetFormData());
+        navigate('/children', { replace: true });
+        dispatch(menuActions.removeTab(states.pathname));
+      } else {
+        navigate('/withdrawal?sid=' + 120, { replace: true });
+      }
       dispatch(thisActions.setConfirmDialog({title: '', open: false}));
-      navigate('/withdrawal?sid=' + 120, { replace: true });
+
     }
   };
   

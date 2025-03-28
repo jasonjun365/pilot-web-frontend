@@ -1,13 +1,13 @@
 export interface IRole {
   id: number,
-  userId: string,
+  userId: string | number,
   roleId: number,
   username: string,
   roleName: string
 }
 
 export interface IUserSession {
-  userId: number,
+  userId: string | number,
   username: string,
   email: string,
   realName: string,

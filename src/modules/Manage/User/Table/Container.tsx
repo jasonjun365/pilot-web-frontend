@@ -5,7 +5,6 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { useSelector, useDispatch } from 'react-redux';
 import Actions from '@/store/actions';
 import {IUser} from '@/libs/types/entities';
-import {getUserInfo} from '@/libs/utils/localstorage';
 
 
 const {
@@ -46,13 +45,7 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
   };
 
   const getData = (params: any) => {
-    const userInfo = getUserInfo();
-    dispatch(thisThunks.getData({
-      params,
-      headers: {
-        'token': userInfo?.token || ''
-      }
-    }));
+    dispatch(thisThunks.getData({params}));
   };
 
   const methods = {

@@ -28,6 +28,7 @@ interface PropTypes extends ViewStylePropTypes { // states
 interface PropTypes { // methods
   setValue: (v: any, n: any) => any
   trigger: (v?: any) => any
+  onChange?: (e?: any) => any
 }
 
 const CSelect: React.FC<PropTypes> = ({
@@ -49,6 +50,7 @@ const CSelect: React.FC<PropTypes> = ({
   autoFocus,
   setValue,
   trigger,
+  onChange,
   getMixinStyle
 }) => {
   const isRequired = schema.fields[name] ? schema.fields[name].exclusiveTests.required : false;
@@ -58,6 +60,8 @@ const CSelect: React.FC<PropTypes> = ({
     setValue(name, value);
     if (Object.keys(errors).length)
       trigger(name);
+    if (onChange)
+      onChange(event);
   };
 
   const noneData = !hasNone ? [] : [{

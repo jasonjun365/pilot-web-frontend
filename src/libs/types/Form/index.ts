@@ -1,17 +1,17 @@
 export interface IOptionType {
   label: string
-  value: string
+  value: string | number
   icon?: string
 }
 
 export interface ReRegistrationFormType {
-  parent_id: number
-  student_id: number
-  program_id: number
-  activity_ids: Array<number>
+  parentId: string | number
+  studentId: number
+  programId: number
+  activityIds: Array<number>
   tuition: number
-  tuition_discount: number
-  tech_fee: number
-  activities_fee: number
-  total_fee: number
+  tuitionDiscount: number
+  techFee: number
+  activitiesFee: number
+  totalFee: number
 }

@@ -1,13 +1,15 @@
 import React from 'react';
 import Head from './Head';
 import ViewStylePropTypes from '@/libs/types/ViewStyle';
+import {IOrder} from '@/libs/types/entities';
 
 interface PropTypes extends ViewStylePropTypes {
+  orderDetail?: IOrder
   handleSubmit?: () => void
   handleCancel?: () => void
 }
 
-const View: React.FC<PropTypes> = ({getMixinStyle, ...props }) => {
+const View: React.FC<PropTypes> = ({orderDetail, getMixinStyle, ...props }) => {
   return (
     <div className={getMixinStyle('layout')}>
       <Head {...props} />

@@ -19,7 +19,7 @@ const View: React.FC<PropTypes> = ({ handleSubmit, handleCancel, getMixinStyle }
           <SmallButton label="Cancel" onClick={handleCancel}/>
         </div>
         <div className={getMixinStyle('btn-box')}>
-          <SmallButton label="Submit" onClick={handleSubmit}/>
+          <SmallButton label="Accept" onClick={handleSubmit}/>
         </div>
       </div>
     </div>

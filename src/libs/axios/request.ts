@@ -2,9 +2,6 @@ import axios from 'axios';
 import querystring from 'query-string';
 import {getUserInfo} from '@/libs/utils/localstorage';
 
-console.log('CUSTOM_IS_MOCK: ', process.env.CUSTOM_IS_MOCK);
-console.log('CUSTOM_BASE_URL: ', process.env.CUSTOM_BASE_URL);
-
 const baseUrl = process.env.CUSTOM_IS_MOCK === 'yes' ? '' : process.env.CUSTOM_BASE_URL;
 
 interface PropTypes {
@@ -16,10 +13,9 @@ interface PropTypes {
   cancelToken?: any
   headers?: any
   extraHeaders?: any
-  isJson?: boolean
 }
 
-export default async ({ url, method='get', params, data, isJson=true, onUploadProgress=null, cancelToken=null, headers, extraHeaders }: PropTypes) => {
+export default async ({ url, method='get', params, data, onUploadProgress=null, cancelToken=null, headers, extraHeaders }: PropTypes) => {
   // data?.forEach((value: any, key: any) => {
   //   console.log('key %s: value %s', key, value);
   // });

@@ -5,6 +5,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Actions from '@/store/actions';
 
 const {
+  actions: menuActions,
+} = Actions.basic.menu;
+
+const {
   actions: thisActions,
   thunks: thisThunks,
 } = Actions.parent.order;
@@ -26,22 +30,34 @@ const ContainerWrap: React.FC<PropTypes> = ({ View }) => {
   const userState = useSelector((state: any) => ({
     data: state.basic.user.data
   }));
+  const thisState = useSelector((state: any) => ({
+    currentTuition: state.parent.order.currentTuition,
+    orderDetail: state.parent.order.orderDetail,
+  }));
 
   const states = {
-    userData: userState.data
+    orderDetail: thisState.orderDetail,
   };
 
   const methods = {
     handleSubmit: () => {
       navigate('/payment', { replace: true });
+      dispatch(menuActions.removeTab('/order'));
+    },
+    handleReceipt: () => {
+      // TODO receipt display receipt pdf in new tab
     },
     handleCancel: () => {
-      navigate('/children', { replace: true });
+      navigate('/tuition', { replace: true });
+      dispatch(menuActions.removeTab('/order'));
     },
   };
 
   useEffect(() => {
-
+    if (_oid) {
+      // get oid detail from back-end
+      dispatch(thisThunks.getOrder({urlParams: {oid: _oid}}));
+    }
   }, []);
 
   return (

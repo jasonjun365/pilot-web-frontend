@@ -20,7 +20,19 @@ interface PropTypes { // methods
   handleClose: () => void
 }
 
-const Btns: React.FC<PropTypes> = ({ loading, btns, submitText='confirm', closeText='notYet', cancelText='notYet', thunkName, submitDisabled, hookSubmit, handleSubmit, handleClose, getMixinStyle }) => {
+const Btns: React.FC<PropTypes> = ({
+  loading,
+  btns,
+  submitText='confirm',
+  closeText='notYet',
+  cancelText='notYet',
+  thunkName,
+  submitDisabled,
+  hookSubmit,
+  handleSubmit,
+  handleClose, 
+  getMixinStyle
+}) => {
   const { t } = useTranslation();
 
   const onSubmit = async (data: any) => {

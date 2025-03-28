@@ -5,14 +5,14 @@ import FormConfirmDialog from './FormConfirmDialog';
 import ViewStylePropTypes from '@/libs/types/ViewStyle';
 
 interface PropTypes extends ViewStylePropTypes {
-  student_id: number
+
 }
 
-const View: React.FC<PropTypes> = ({student_id, getMixinStyle }) => {
+const View: React.FC<PropTypes> = ({getMixinStyle }) => {
   return (
     <div className={getMixinStyle('layout')}>
       <Head />
-      <ApplyForm student_id={student_id} />
+      <ApplyForm />
       <FormConfirmDialog />
     </div>
   );

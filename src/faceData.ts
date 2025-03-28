@@ -40,7 +40,7 @@ export const programList = [
   {
     id: faker.number.int({min: 1000, max: 100000}),
     name: 'Program A',
-    description: 'Description of the program',
+    description: 'Description of the program A',
     year: 2025,
     season: 'summer',
     start_date: '2025--5-01',
@@ -56,7 +56,7 @@ export const programList = [
   {
     id: faker.number.int({min: 1000, max: 100000}),
     name: 'Program B',
-    description: 'Description of the program',
+    description: 'Description of the program B',
     year: 2025,
     season: 'fall',
     start_date: '2025--5-03',
@@ -72,7 +72,7 @@ export const programList = [
   {
     id: faker.number.int({min: 1000, max: 100000}),
     name: 'Program C',
-    description: 'Description of the program',
+    description: 'Description of the program C',
     year: 2025,
     season: 'winter',
     start_date: '2025--11-02',
@@ -91,7 +91,7 @@ export const activityList = [
   {
     id: faker.number.int({min: 1000, max: 100000}),
     name: 'Activity A',
-    description: 'Description of the activity',
+    description: 'Description of the activity A',
     year: 2025,
     season: 'summer',
     start_date: '2025--5-01',
@@ -105,7 +105,7 @@ export const activityList = [
   {
     id: faker.number.int({min: 1000, max: 100000}),
     name: 'Activity B',
-    description: 'Description of the activity',
+    description: 'Description of the activity B',
     year: 2025,
     season: 'fall',
     start_date: '2025--5-03',
@@ -119,7 +119,7 @@ export const activityList = [
   {
     id: faker.number.int({min: 1000, max: 100000}),
     name: 'Activity C',
-    description: 'Description of the activity',
+    description: 'Description of the activity C',
     year: 2025,
     season: 'winter',
     start_date: '2025--11-02',
@@ -190,7 +190,7 @@ export const tuitionList = [
     tech_fee: 200.00,
     activities_fee: 300.00,
     total_fee: 1450.00,
-    status: 'Done',
+    dataStatus: 'Done',
     create_at: Date.now(),
     update_at: Date.now(),
   },
@@ -251,7 +251,7 @@ export const tuitionList = [
     tech_fee: 200.00,
     activities_fee: 300.00,
     total_fee: 1450.00,
-    status: 'Progress',
+    dataStatus: 'Progress',
     create_at: Date.now(),
     update_at: Date.now(),
   }

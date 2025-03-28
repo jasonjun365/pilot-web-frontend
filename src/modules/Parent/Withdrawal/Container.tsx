@@ -9,6 +9,14 @@ const {
   thunks: thisThunks,
 } = Actions.parent.withdrawal;
 
+const {
+  actions: menuActions,
+} = Actions.basic.menu;
+
+const {
+  actions: reRegActions,
+} = Actions.parent.reRegistration;
+
 interface PropTypes { // states
   View: React.FC<any>
 }
@@ -26,19 +34,26 @@ const ContainerWrap: React.FC<PropTypes> = ({ View }) => {
   const userState = useSelector((state: any) => ({
     data: state.basic.user.data
   }));
+  const reRegState = useSelector((state: any) => state.parent.reRegistration);
+  const thisState = useSelector((state: any) => state.parent.withdrawal);
 
   const states = {
-    userData: userState.data
+    userData: userState.data,
+    pathname: reRegState.pathname,
+    pdfUrl: thisState.pdfUrl
   };
 
   const methods = {
     handleSubmit: () => {
-      console.log('handle withdrawal');
-      alert('Download a PDF file.');
+      window.open('/withdrawal.pdf','_blank');
       navigate('/children', { replace: true });
+      dispatch(reRegActions.resetFormData());
+      dispatch(menuActions.removeTab(states.pathname));
     },
     handleCancel: () => {
       navigate('/children', { replace: true });
+      dispatch(reRegActions.resetFormData());
+      dispatch(menuActions.removeTab(states.pathname));
     },
   };
 

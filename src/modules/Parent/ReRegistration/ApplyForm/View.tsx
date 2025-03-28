@@ -1,12 +1,15 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Formik, Field, Form, ErrorMessage} from 'formik';
-import { Input, Select } from '@/components/UI';
-import { Button, FormLabel } from '@mui/material';
-import * as Yup from 'yup';
+import { Button } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import ViewStylePropTypes from '@/libs/types/ViewStyle';
 import {useTranslation} from 'react-i18next';
+import {useForm} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
+import CircularLoading from '@/components/UI/Loading/Circular';
+import Select2 from '@/components/UI/Form/Select2';
+import ViewStylePropTypes from '@/libs/types/ViewStyle';
+import {IOptionType} from '@/libs/types/Form';
 import Actions from '@/store/actions';
 
 const {
@@ -15,119 +18,128 @@ const {
 } = Actions.parent.reRegistration;
 
 interface PropTypes extends ViewStylePropTypes {
-  student_id: number
+  studentId: string | number
+  formData: any
+  loading: boolean
+  studentOptions: Array<IOptionType>
+  programOptions: Array<IOptionType>
+  activityOptions: Array<IOptionType>
+  handleSubmit: (values: any) => void
+  handleCancel?: () => void
 }
 
-const View: React.FC<PropTypes> = ({student_id, getMixinStyle, ...props}) => {
+const View: React.FC<PropTypes> = ({studentId, formData, loading, handleSubmit, handleCancel, getMixinStyle, ...props}) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const thisState = useSelector((state: any) => state.parent.reRegistration);
 
-  const states = {
-    studentsIds: thisState.studentsIds,
-    programsIds: thisState.programsIds,
-    studentOptions: thisState.formModule.studentOptions,
-    programOptions: thisState.formModule.programOptions,
-    activityOptions: thisState.formModule.activityOptions,
-    data: thisState.formModule.data,
-    loading: thisState.loading,
+  const schema = yup.object({
+    studentId: yup.number().required(t('Missing required field')),
+    programId: yup.number().required(t('Missing required field')),
+  });
+  const {
+    control,
+    handleSubmit: hookSubmit,
+    reset,
+    getValues,
+    setValue,
+    trigger,
+    formState: { errors },
+    register
+  } = useForm<any>({ resolver: yupResolver(schema) });
+  const formProps = { errors, hookSubmit, reset, trigger };
+  const itemProps = { control, errors, schema, getValues, setValue, trigger, initialData: formData };
+  const isError = Object.keys(errors).length > 0;
+
+  const handleProgramChange = (e:any) => {
+    const { target: { value } } = e;
+    dispatch(thisActions.setFormData({
+      programId: value,
+    }));
   };
 
-  const validationSchema = useMemo(() => Yup.object().shape({
-    student_id: Yup.number().required(t('Missing required field')),
-    program_id: Yup.number().required(t('Missing required field')),
-  }), [t]);
-  const onSubmit = useCallback((values: any) => {
-    // console.log('values', values);
-    if (values.student_id && values.program_id) {
-      dispatch(thisActions.setConfirmDialog({title: 'Confirmation', open: true}));
-    }
-  }, []);
-  const onValuesChange = useCallback((e: any, name: string) => {
-    const _data: any = {};
-    _data[name] = e.target.value;
-    dispatch(thisActions.setFormData(_data));
-  }, []);
+  const handleActivityChange = (e:any) => {
+    const { target: { value } } = e;
+    dispatch(thisActions.setFormData({
+      activityIds: value,
+    }));
+  };
 
   return (
     <div className={getMixinStyle('layout')}>
-      <Formik
-        validationSchema={validationSchema}
-        initialValues={{
-          student_id: student_id,
-          program_id: 0,
-          activity_ids: []
-        }}
-        onSubmit={onSubmit}
-      >
-        {({errors, touched}) => (
-          <Form>
-            <div className={getMixinStyle('formRow')}>
-              <FormLabel>Student</FormLabel>
-              <Field
-                name="student_id"
-                label="Student"
-                options={states.studentOptions}
-                component={Select}
-                onCustomChange={(e: any, name: string) => {
-                  onValuesChange(e, name);
-                }}
-              />
-            </div>
-            <div className={getMixinStyle('formRow')}>
-              <FormLabel>Program</FormLabel>
-              <Field
-                name="program_id"
-                label="Program"
-                options={states.programOptions}
-                component={Select}
-                onCustomChange={(e: any, name: string) => {
-                  onValuesChange(e, name);
-                }}
-              />
-            </div>
-            <div className={getMixinStyle('formRow')}>
-              <FormLabel>Activity</FormLabel>
-              <Field
-                name="activity_ids"
-                label="Activity"
-                multiple={true}
-                options={states.activityOptions}
-                component={Select}
-                onCustomChange={(e: any, name: string) => {
-                  onValuesChange(e, name);
-                }}
-              />
-            </div>
-            <div className={getMixinStyle('formInformation')}>
-              <div><label>Tuition: </label><span>${states.data.tuition}</span></div>
-              <div><label>Tuition Discount: </label><span>${states.data.tuition_discount}</span></div>
-              <div><label>Tech fee: </label><span>${states.data.tech_fee}</span></div>
-              <div><label>Activities fee: </label><span>${states.data.activities_fee}</span></div>
-              <div><label>Total fee: </label><span>${states.data.total_fee}</span></div>
-            </div>
-            <div className={getMixinStyle('formActions')}>
-              <Button
-                size="small"
-                variant="outlined"
-                color="primary"
-                type="button"
-                onClick={() => {
-                  navigate('/children', { replace: true });
-                }}
-                disableElevation>Cancel</Button>
-              <Button
-                size="small"
-                variant="contained"
-                color="primary"
-                type="submit"
-                disableElevation>Submit</Button>
-            </div>
-
-          </Form>
-        )}
-      </Formik>
+      <form>
+        <CircularLoading mask={true} loading={loading}>
+          <div className={getMixinStyle('formRow')}>
+            <Select2
+              {...itemProps}
+              label="Student"
+              placeholder="Please select student."
+              name='studentId'
+              variant="outlined"
+              fullWidth
+              autoFocus={false}
+              defaultValue={studentId}
+              data={props.studentOptions}
+            />
+          </div>
+          <div className={getMixinStyle('formRow')}>
+            <Select2
+              {...itemProps}
+              label="Program"
+              placeholder="Please select program."
+              name='programId'
+              variant="outlined"
+              fullWidth
+              autoFocus={false}
+              defaultValue=""
+              data={props.programOptions}
+              onChange={handleProgramChange}
+            />
+          </div>
+          <div className={getMixinStyle('formRow')}>
+            <Select2
+              {...itemProps}
+              label="Activity"
+              placeholder="Please select program."
+              name='activityIds'
+              variant="outlined"
+              fullWidth
+              autoFocus={false}
+              multiple={true}
+              defaultValue=""
+              data={props.activityOptions}
+              onChange={handleActivityChange}
+            />
+          </div>
+          <div className={getMixinStyle('formInformation')}>
+            <div><label>Tuition: </label><span>${formData.tuition}</span></div>
+            <div><label>Tuition Discount: </label><span>${formData.tuitionDiscount}</span></div>
+            <div><label>Tech fee: </label><span>${formData.techFee}</span></div>
+            <div><label>Activities fee: </label><span>${formData.activitiesFee}</span></div>
+            <div><label>Total fee: </label><span>${formData.totalFee}</span></div>
+          </div>
+          <div className={getMixinStyle('formActions')}>
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              type="button"
+              onClick={() => {
+                if (handleCancel) {
+                  handleCancel();
+                }
+              }}
+              disableElevation>Cancel</Button>
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={hookSubmit(handleSubmit)}
+              disableElevation>Submit</Button>
+          </div>
+        </CircularLoading>
+      </form>
     </div>
   );
 };

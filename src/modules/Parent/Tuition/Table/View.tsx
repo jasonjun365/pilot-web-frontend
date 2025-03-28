@@ -8,44 +8,17 @@ import {Tooltip} from '@mui/material';
 import DeleteIcon from '@/resource/file/svg/special/Delete';
 
 interface PropTypes extends DefaultPropTypes, ViewStylePropTypes {
+  navToOrderDetailPage: (oid: string) => void
 }
 
 const View: React.FC<PropTypes> = ({
-  getMixinStyle, ...props
+  navToOrderDetailPage,
+  getMixinStyle,
+  ...props
 }) => {
   const { t } = useTranslation();
 
   const columns: ColumnTypes[] = [
-    {
-      name: 'id',
-      align: 'left',
-      minWidth: 100,
-      label: 'ID', // t('label.livestream')
-      render: (val, record) => {
-        return (
-          <div className={getMixinStyle('column')}>
-            <div className={getMixinStyle('right')}>
-              <div className={getMixinStyle('title')}>{val}</div>
-            </div>
-          </div>
-        );
-      }
-    },
-    {
-      name: 'parent_id',
-      align: 'left',
-      width: 200,
-      label: 'Parent', // t('label.status')
-      render: (val, record) => {
-        return (
-          <div className={getMixinStyle('column')}>
-            <div className={getMixinStyle('right')}>
-              <div className={getMixinStyle('title')}>{record.parent?.username}</div>
-            </div>
-          </div>
-        );
-      }
-    },
     {
       name: 'student_id',
       align: 'left',
@@ -56,6 +29,21 @@ const View: React.FC<PropTypes> = ({
           <div className={getMixinStyle('column')}>
             <div className={getMixinStyle('right')}>
               <div className={getMixinStyle('title')}>{record.student?.name}</div>
+            </div>
+          </div>
+        );
+      }
+    },
+    {
+      name: 'parent_id',
+      align: 'left',
+      width: 200,
+      label: 'Parent',
+      render: (val, record) => {
+        return (
+          <div className={getMixinStyle('column')}>
+            <div className={getMixinStyle('right')}>
+              <div className={getMixinStyle('title')}>{record.parent?.username}</div>
             </div>
           </div>
         );
@@ -103,17 +91,17 @@ const View: React.FC<PropTypes> = ({
           <div className={getMixinStyle('column')}>
             <div className={getMixinStyle('right')}>
               <div className={getMixinStyle('title')}>Tuition: ${record.tuition}</div>
-              <div className={getMixinStyle('title')}>Tech fee: ${record.tech_fee}</div>
-              <div className={getMixinStyle('title')}>Activities fee: ${record.activities_fee}</div>
-              <div className={getMixinStyle('title')}>Discount: -${record.tuition_discount}</div>
-              <div className={getMixinStyle('title')}>Total: ${record.total_fee}</div>
+              <div className={getMixinStyle('title')}>Discount: -${record.tuitionDiscount}</div>
+              <div className={getMixinStyle('title')}>Tech fee: ${record.techFee}</div>
+              <div className={getMixinStyle('title')}>Activities fee: ${record.activitiesFee}</div>
+              <div className={getMixinStyle('title')}>Total: ${record.totalFee}</div>
             </div>
           </div>
         );
       }
     },
     {
-      name: 'status',
+      name: 'dataStatus',
       align: 'left',
       width: 120,
       label: 'Fee',
@@ -121,7 +109,7 @@ const View: React.FC<PropTypes> = ({
         return (
           <div className={getMixinStyle('column')}>
             <div className={getMixinStyle('right')}>
-              <div className={getMixinStyle('title')}>{record.status}</div>
+              <div className={getMixinStyle('title')}>{record.dataStatus}</div>
             </div>
           </div>
         );
@@ -136,12 +124,9 @@ const View: React.FC<PropTypes> = ({
         return (
           <div className={getMixinStyle('column')}>
             <div className={getMixinStyle('right')}>
-              {record.status === 'Progress' && (
-                <SmallButton label="Pay" onClick={() => {}}/>
-              )}
-              {record.status === 'Done' && (
-                <SmallButton label="Receipt print" onClick={() => {}}/>
-              )}
+              <SmallButton label="Order Detail" onClick={() => {
+                navToOrderDetailPage(record.order.id);
+              }}/>
             </div>
           </div>
         );

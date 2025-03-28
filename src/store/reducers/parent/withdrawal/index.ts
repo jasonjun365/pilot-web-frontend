@@ -9,10 +9,12 @@ const {
 
 interface PropTypes {
   loading: boolean
+  pdfUrl: string
 }
 
 const initialState: PropTypes = {
   loading: false,
+  pdfUrl: '/withdrawal.pdf',
 };
 const data = createReducer(
   initialState,
