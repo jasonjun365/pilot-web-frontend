@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Actions from '@/store/actions';
 import {IStudent} from '@/libs/types/entities';
 
+const {
+  actions: menuActions,
+} = Actions.basic.menu;
 
 const {
   actions: thisActions,
@@ -67,6 +70,8 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
     },
     handleReRegistrationClick: (studentId: number) => {
       navigate('/re-registration?sid=' + studentId, { replace: true });
+      dispatch(menuActions.removeTab('/children'));
+      dispatch(menuActions.removeTab('/tuition'));
     },
     handleDeleteFormShow: () => {
       const params = {
