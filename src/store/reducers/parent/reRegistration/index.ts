@@ -78,11 +78,9 @@ const data = createReducer(
         activitiesFee: 0,
         totalFee: 0,
       };
-      console.log('======== resetFormData: ', state.formModule.data);
     })
     .addCase(actions.setFormData, (state, action: PayloadAction<ReRegistrationFormType>) => {
       state.formModule.data = {...state.formModule.data, ...action.payload};
-      console.log('======== setFormData: ', state.formModule.data);
       const selectedPrograms = state.programs.filter((item) => item.id === state.formModule.data.programId);
       const selectedActivities = state.activities.filter((item) => state.formModule.data.activityIds?.includes(item.id));
       if (selectedPrograms.length > 0) {
@@ -105,7 +103,6 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.getStudents.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      console.log('thunks.getStudents.fulfilled: ', action.payload.data);
       if (action.payload.data?.records) {
         state.students = action.payload.data.records;
         state.formModule.studentOptions = action.payload.data.records.map((item: IStudent) => ({label: item.name, value: item.id}));
@@ -119,7 +116,6 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.getPrograms.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      console.log('thunks.getPrograms.fulfilled: ', action.payload.data);
       if (action.payload.data?.records) {
         state.programs = action.payload.data.records;
         state.formModule.programOptions = action.payload.data.records.map((item: IProgram) => ({label: item.name, value: item.id}));
@@ -133,7 +129,6 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.getActivities.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      console.log('thunks.getActivities.fulfilled: ', action.payload.data);
       if (action.payload.data?.records) {
         state.activities = action.payload.data.records;
         state.formModule.activityOptions = action.payload.data.records.map((item: IActivity) => ({label: item.name, value: item.id}));
@@ -147,7 +142,6 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.postTuition.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      console.log('thunks.getActivities.fulfilled: ', action.payload.data);
       if (action.payload.data?.records) {
         state.activities = action.payload.data.records;
         state.formModule.activityOptions = action.payload.data.records.map((item: IActivity) => ({label: item.name, value: item.id}));

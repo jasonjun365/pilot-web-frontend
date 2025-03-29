@@ -14,7 +14,7 @@ const View: React.FC<PropTypes> = ({ getMixinStyle }) => {
   return (
     <div className={getMixinStyle('layout')}>
       <Head />
-      <SearchForm />
+      {/* <SearchForm /> */}
       <Table />
       <EditForm />
       <DeleteForm />

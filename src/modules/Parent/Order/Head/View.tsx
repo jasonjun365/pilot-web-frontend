@@ -32,7 +32,7 @@ const View: React.FC<PropTypes> = ({
       <div className={getMixinStyle('right')}>
         {orderDetail?.dataStatus === 'Progress' && (
           <div className={getMixinStyle('btn-box')}>
-            <SmallButton label="Confirm Pay" onClick={handleSubmit}/>
+            <SmallButton label="Pay" onClick={handleSubmit}/>
           </div>
         )}
         {orderDetail?.dataStatus === 'Done' && (

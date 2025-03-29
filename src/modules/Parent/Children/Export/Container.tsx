@@ -1,15 +1,14 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Actions from '@/store/actions';
-// import {delUserInfo} from '@/libs/utils/localstorage';
+import exportExcel from '@/libs/utils/export/exportExcel';
+import {IExcelOption} from '@/libs/utils/export/type';
+import {unwrapResult} from '@reduxjs/toolkit';
 
 const {
-  actions: lightActions
-} = Actions.basic.light;
-
-const {
-  actions: userActions,
-} = Actions.basic.user;
+  actions: thisActions,
+  thunks: thisThunks,
+} = Actions.parent.children.exportData;
 
 interface PropTypes {
   Index: React.FC<any>
@@ -17,22 +16,38 @@ interface PropTypes {
 
 const Container: React.FC<PropTypes> = ({Index}) => {
   const dispatch = useDispatch();
-  // const userState = useSelector((state: any) => state.basic.user);
+  const thisState = useSelector((state: any) => state.parent.children.exportData);
 
   const states = {
-    // data: userState.data,
+    loading: thisState.loading,
   };
 
   const methods = {
     handleExportPDF: () => {
-      // dispatch(lightActions[v ? 'open' : 'close']());
+      // TODO
+      alert('Implement later');
     },
     handleExportExcel: () => {
-      // delUserInfo();
-      // dispatch(userActions.removeUserSession());
-      // setTimeout(() => {
-      //   window.location.href = '/signin';
-      // }, 500);
+      const option: IExcelOption = {
+        fileName: 'Students',
+        datas: [
+          {
+            sheetData: [],
+            sheetName: 'Students',
+            sheetFilter: ['id', 'name', 'email', 'address', 'parentName', 'parentEmail'],
+            sheetHeader: ['ID', 'Student Name', 'Student Email', 'Address', 'Parent Name', 'Parent Email'],
+            columnWidths: [5, 10, 15, 15, 10, 15],
+          },
+        ]
+      };
+
+      // Get My all students
+      dispatch(thisThunks.getExportData({params: thisState.initialSearchForm})).then(unwrapResult).then((response: any) => {
+        if (response.code === 0 && response?.data?.records) {
+          option.datas[0].sheetData = response.data.records;
+          exportExcel(option);
+        }
+      });
     }
   };
 

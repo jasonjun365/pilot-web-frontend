@@ -53,7 +53,6 @@ const View: React.FC<PropTypes> = ({loading, handleSubmit, getMixinStyle, ...pro
   const isError = Object.keys(errors).length > 0;
 
   const onSubmit = async (values: any) => {
-    console.log('login: ', values);
     handleSubmit(values);
   };
 

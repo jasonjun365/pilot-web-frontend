@@ -55,7 +55,6 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
       getData(thisState.initialSearchForm);
     },
     handleGetData: (params: any) => {
-      console.log('handleGetData', params);
       getData(params);
     },
     handleSetSelectValue: (params: any) => {

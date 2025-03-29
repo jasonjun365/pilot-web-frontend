@@ -46,7 +46,6 @@ const Special: React.FC<PropTypes> = ({ View}) => {
 
   const methods = {
     handleSubmit: (params: any) => {
-      console.log('handleSubmit:', params);
       // Step 1 - set params to formData
       dispatch(thisActions.setFormData(params));
       // Step 2 - Open Confirm Dialog

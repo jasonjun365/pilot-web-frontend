@@ -47,7 +47,6 @@ const Special: React.FC<PropTypes> = ({ View }) => {
 
       if (editFormState.editForm?.type === 'NEW') {
         dispatch(editFormThunks.addUser({data: data})).then(unwrapResult).then((response: any) => {
-          console.log('editFormThunks.addUser: ', response);
           if (response?.data) {
             dispatch(tableActions.appendDataToList(response.data));
           }
@@ -55,7 +54,6 @@ const Special: React.FC<PropTypes> = ({ View }) => {
         });
       } else if (editFormState.editForm?.type === 'EDIT') {
         dispatch(editFormThunks.editUser({data: {...states.data, ...data}})).then(unwrapResult).then((response: any) => {
-          console.log('editFormThunks.editUser: ', response);
           dispatch(tableActions.updateDataToList({...states.data, ...data}));
           methods.handleClose();
         });

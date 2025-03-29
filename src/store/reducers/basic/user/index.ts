@@ -33,7 +33,6 @@ const data = createReducer(
       state.loading = action.payload;
     })
     .addCase(actions.checkUserSession, (state, action: PayloadAction<any>) => {
-      console.log('checkUserSession:', action.payload);
       if (action.payload?.token) {
         state.data = action.payload;
         state.isLogin = true;
@@ -45,7 +44,6 @@ const data = createReducer(
       }
     })
     .addCase(actions.removeUserSession, (state) => {
-      console.log('removeUserSession:');
       state.data = null;
       state.isLogin = false;
       state.roles = ['anonymous'];
@@ -54,7 +52,6 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.getData.fulfilled, (state, action: PayloadAction<any>) => {
-      console.log('getData', action.payload.data);
       if (action.payload.data) {
         state.data = action.payload.data;
         state.isLogin = true;

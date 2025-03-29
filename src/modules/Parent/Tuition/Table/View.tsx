@@ -91,7 +91,7 @@ const View: React.FC<PropTypes> = ({
           <div className={getMixinStyle('column')}>
             <div className={getMixinStyle('right')}>
               <div className={getMixinStyle('title')}>Tuition: ${record.tuition}</div>
-              <div className={getMixinStyle('title')}>Discount: -${record.tuitionDiscount}</div>
+              <div className={getMixinStyle('title')}>Tuition Discount: -${record.tuitionDiscount}</div>
               <div className={getMixinStyle('title')}>Tech fee: ${record.techFee}</div>
               <div className={getMixinStyle('title')}>Activities fee: ${record.activitiesFee}</div>
               <div className={getMixinStyle('title')}>Total: ${record.totalFee}</div>
@@ -104,7 +104,7 @@ const View: React.FC<PropTypes> = ({
       name: 'dataStatus',
       align: 'left',
       width: 120,
-      label: 'Fee',
+      label: 'Status',
       render: (val, record) => {
         return (
           <div className={getMixinStyle('column')}>

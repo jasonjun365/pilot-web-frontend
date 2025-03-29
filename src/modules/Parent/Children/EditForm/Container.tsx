@@ -46,13 +46,11 @@ const Special: React.FC<PropTypes> = ({ View }) => {
 
       if (editFormState.editForm?.type === 'NEW') {
         dispatch(editFormThunks.addStudent({data: {...states.data, ...data}})).then(unwrapResult).then((response: any) => {
-          console.log('editFormThunks.addStudent: ', response);
           dispatch(tableActions.setTableReload(true));
           methods.handleClose();
         });
       } else if (editFormState.editForm?.type === 'EDIT') {
         dispatch(editFormThunks.editStudent({data: {...states.data, ...data}})).then(unwrapResult).then((response: any) => {
-          console.log('editFormThunks.editStudent: ', response);
           dispatch(tableActions.updateDataToList({...copy_data, ...{id: states.data.id}}));
           methods.handleClose();
         });

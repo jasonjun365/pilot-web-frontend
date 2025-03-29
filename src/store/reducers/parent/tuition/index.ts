@@ -20,11 +20,15 @@ interface PropTypes {
       [t: string]: string[]
     }
   }
+  reload: boolean,
+  exportModal: {
+    data: Array<ITuition>
+    searchForm: any
+  }
 }
 
 const initialSearchForm = {
   keyword: '',
-  sort: 'recent',
   page: 1,
   size: 10,
 };
@@ -40,13 +44,25 @@ const initialState: PropTypes = {
     data: {
       remove: []
     }
+  },
+  reload: false,
+  exportModal: {
+    data: [],
+    searchForm: {
+      keyword: '',
+      page: 1,
+      size: 100,
+    }
   }
 };
 const data = createReducer(
   initialState,
   builder => { builder
-    .addCase(actions.setLoading, (state, action: PayloadAction<any>) => {
+    .addCase(actions.setLoading, (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    })
+    .addCase(actions.setReload, (state, action: PayloadAction<boolean>) => {
+      state.reload = action.payload;
     })
     .addCase(actions.setSelectValue, (state, action: PayloadAction<any, any>) => {
       state.selects.data[action.payload.mode] = action.payload.value;
@@ -60,12 +76,25 @@ const data = createReducer(
       state.selects.data[initialState.selects.now] = initialState.selects.data[initialState.selects.now];
     })
     .addCase(thunks.getTuitionList.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      console.log('Tuition List: ', action.payload.data);
       state.count = action.payload.data.total;
       state.data = action.payload.data.records;
       state.loading = false;
     })
     .addCase(thunks.getTuitionList.rejected, (state) => {
+      state.loading = false;
+    })
+    .addCase(thunks.getExportData.pending, (state, action: PayloadAction<any, any, any>) => {
+      const params = action.meta.arg.params;
+      Object.keys(params).forEach((t: any) => {
+        state.exportModal.searchForm[t] = params[t];
+      });
+      state.loading = true;
+    })
+    .addCase(thunks.getExportData.fulfilled, (state, action: PayloadAction<any, any, any>) => {
+      state.exportModal.data = action.payload.data.records;
+      state.loading = false;
+    })
+    .addCase(thunks.getExportData.rejected, (state) => {
       state.loading = false;
     });
   }

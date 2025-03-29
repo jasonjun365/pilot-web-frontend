@@ -1,8 +1,9 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Actions from '@/store/actions';
+import html2PDF from 'jspdf-html2canvas';
 
 const {
   actions: menuActions,
@@ -27,6 +28,8 @@ const ContainerWrap: React.FC<PropTypes> = ({ View }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const _oid: any = searchParams.get('oid') || 0;
+  const refDetail = useRef(null);
+
   const userState = useSelector((state: any) => ({
     data: state.basic.user.data
   }));
@@ -36,16 +39,25 @@ const ContainerWrap: React.FC<PropTypes> = ({ View }) => {
   }));
 
   const states = {
+    refDetail: refDetail,
     orderDetail: thisState.orderDetail,
   };
 
   const methods = {
     handleSubmit: () => {
-      navigate('/payment', { replace: true });
-      dispatch(menuActions.removeTab('/order'));
+      dispatch(thisActions.setConfirmDialog({title: 'Confirm Pay', open: true}));
     },
     handleReceipt: () => {
-      // TODO receipt display receipt pdf in new tab
+      // receipt display receipt pdf in new tab
+      if (refDetail?.current) {
+        html2PDF(refDetail.current, {
+          jsPDF: {
+            format: 'a4',
+          },
+          imageType: 'image/jpeg',
+          output: 'Receipt.pdf'
+        });
+      }
     },
     handleCancel: () => {
       navigate('/tuition', { replace: true });

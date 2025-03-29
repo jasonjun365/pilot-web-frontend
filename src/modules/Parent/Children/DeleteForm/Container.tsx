@@ -40,7 +40,6 @@ const Special: React.FC<PropTypes> = ({ View, handleGetData }) => {
 
   const methods = {
     handleSubmit: (params: any) => {
-      console.log('handleSubmit:', params);
       dispatch(thisThunks[submitName]({ data: {ids: params.postIds} }))
         .then(unwrapResult)
         .then((response: any) => {

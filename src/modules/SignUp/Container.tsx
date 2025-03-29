@@ -29,7 +29,6 @@ const Special: React.FC<PropTypes> = ({ View }) => {
 
   const methods = {
     handleSubmit: (values: any) => {
-      console.log('values', values);
       dispatch(userThunks.signup({params: values}));
     },
     navToSignin: () => {

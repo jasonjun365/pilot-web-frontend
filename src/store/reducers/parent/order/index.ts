@@ -12,7 +12,11 @@ interface PropTypes {
   currentTuition: ITuition | undefined,
   orderList: Array<IOrder>
   orderDetail: IOrder | undefined
-  loading: boolean
+  loading: boolean,
+  formConfirm: {
+    title: string
+    open: boolean
+  }
 }
 
 const initialState: PropTypes = {
@@ -20,12 +24,19 @@ const initialState: PropTypes = {
   orderList: [],
   orderDetail: undefined,
   loading: false,
+  formConfirm: {
+    title: '',
+    open: false,
+  },
 };
 const data = createReducer(
   initialState,
   builder => { builder
     .addCase(actions.setLoading, (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    })
+    .addCase(actions.setConfirmDialog, (state, action: PayloadAction<{title: string, open: boolean}>) => {
+      state.formConfirm = action.payload;
     })
     .addCase(actions.setCurrentTuition, (state, action: PayloadAction<ITuition | undefined>) => {
       state.currentTuition = action.payload;
@@ -40,7 +51,6 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.getOrder.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      console.log('thunks.getOrder.fulfilled: ', action.payload);
       state.orderDetail = action.payload.data;
       state.loading = false;
     })

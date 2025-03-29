@@ -47,7 +47,6 @@ const Special: React.FC<PropTypes> = ({ View, handleGetData }) => {
       const postData = {...states.data, ...{dataStatus: 'Progress'}};
       dispatch(thisThunks.postTuition({data: postData})).then(unwrapResult).then((response: any) => {
         // Step 4 - after api return success, redirect to order page
-        console.log('handleSubmit response:', response);
         if (response.code === 0) {
           dispatch(orderActions.setCurrentTuition(response.data));
           dispatch(thisActions.setConfirmDialog({title: '', open: false}));
@@ -58,7 +57,6 @@ const Special: React.FC<PropTypes> = ({ View, handleGetData }) => {
       });
     },
     handleClose: (type?: string) => {
-      console.log('======-----0000', type);
       if (type === 'dialogEvent') {
         dispatch(thisActions.resetFormData());
         navigate('/children', { replace: true });

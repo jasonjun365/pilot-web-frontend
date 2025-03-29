@@ -56,7 +56,6 @@ const data = createReducer(
     })
     .addCase(actions.setEditFormData, (state, action: PayloadAction<IUser>) => {
       state.editForm.data = {...state.editForm.data, ...action.payload};
-      console.log('setEditFormData: ', state.editForm.data);
     })
     .addCase(thunks.addUser.pending, (state) => {
       state.editForm.loading = true;

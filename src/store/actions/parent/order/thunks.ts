@@ -9,5 +9,9 @@ export default createAsyncThunks(name, [[
   'getOrderList', {
     url: '/api/v1/app/order',
     method: 'get',
+  }], [
+  'payOrder', {
+    url: ({ oid }) => `/api/v1/app/order/${oid}`,
+    method: 'put',
   }]
 ]);
