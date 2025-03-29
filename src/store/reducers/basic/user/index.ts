@@ -81,7 +81,7 @@ const data = createReducer(
       state.loading = true;
     })
     .addCase(thunks.logout.fulfilled, (state, action: PayloadAction<any, any, any>) => {
-      // TODO
+      // TODO do later
       // if (action.payload.data) {
       //   state.data = action.payload.data;
       //   state.isLogin = true;

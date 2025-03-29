@@ -5,6 +5,7 @@ import {IExcelOption} from '@/libs/utils/export/type';
 import {unwrapResult} from '@reduxjs/toolkit';
 import {IActivity, ITuition} from '@/libs/types/entities';
 import exportExcel from '@/libs/utils/export/exportExcel';
+import html2PDF from 'jspdf-html2canvas';
 
 const {
   actions: thisActions,
@@ -26,10 +27,19 @@ const Container: React.FC<PropTypes> = ({View}) => {
 
   const methods = {
     handleExportPDF: () => {
-      // TODO export data to PDF
+      const tableContainer = document.getElementById(thisState.containerId);
+      if (tableContainer) {
+        html2PDF(tableContainer, {
+          jsPDF: {
+            format: 'a4',
+            orientation: 'l',
+          },
+          imageType: 'image/jpeg',
+          output: 'Tuition.pdf'
+        });
+      }
     },
     handleExportExcel: () => {
-      // TODO export data to excel
       const option: IExcelOption = {
         fileName: 'MyTuition',
         datas: [

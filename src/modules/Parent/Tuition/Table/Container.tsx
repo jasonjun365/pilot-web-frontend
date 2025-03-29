@@ -30,6 +30,7 @@ const Special: React.FC<PropTypes> = ({ View, props }) => {
   const getStatusName = 'getStatus';
 
   const states = {
+    containerId: thisState.containerId,
     searchForm: thisState.searchForm,
     data: thisState.data,
     loading: thisState.loading,

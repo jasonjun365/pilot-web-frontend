@@ -7,7 +7,8 @@ import Table from './Table';
 import Pagination from './Pagination';
 import CircularLoading from '@/components/UI/Loading/Circular';
 
-interface PropTypes { // states
+interface PropTypes {
+  containerId?: string
   columns: ColumnTypes[]
   data: any[]
   rowkey?: string | undefined
@@ -25,7 +26,7 @@ interface PropTypes {
   handleGetData: (v: any) => void
 }
 
-const PagesTable: React.FC<PropTypes> = ({ loading, count, searchForm, selectProps, searchFormHeight='51px', extraHeight='0px', thunkNames, changeToTop=true, handleGetData, ...props }) => {
+const PagesTable: React.FC<PropTypes> = ({ containerId, loading, count, searchForm, selectProps, searchFormHeight='51px', extraHeight='0px', thunkNames, changeToTop=true, handleGetData, ...props }) => {
   const { t } = useTranslation();
   
   const selectBarHeight = useRef('48px');
@@ -55,6 +56,7 @@ const PagesTable: React.FC<PropTypes> = ({ loading, count, searchForm, selectPro
     >
       <SelectBar data={props.data} columns={props.columns} selectProps={selectProps} height={selectBarHeight.current}/>
       <TableContainer
+        id={containerId ? containerId : 'tableContainer'}
         ref={tableRef}
         sx={{ height: '100%' }}>
         <Table {...props} animationStyle={{

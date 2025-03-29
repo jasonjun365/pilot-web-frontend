@@ -12,6 +12,7 @@ const {
 } = space;
 
 interface PropTypes {
+  containerId: string
   initialSearchForm: any
   searchForm: any
   data: IStudent[]
@@ -34,6 +35,7 @@ const initialSearchForm = {
 };
 
 const initialState: PropTypes = {
+  containerId: 'studentTableContainer',
   initialSearchForm,
   searchForm: initialSearchForm,
   data: [],

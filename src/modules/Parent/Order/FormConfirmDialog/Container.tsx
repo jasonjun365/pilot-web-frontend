@@ -51,7 +51,6 @@ const Special: React.FC<PropTypes> = ({ View, handleGetData }) => {
             navigate('/tuition', { replace: true });
           }
         });
-        // TODO 未完
       } else {
         alert('Order not found.');
       }

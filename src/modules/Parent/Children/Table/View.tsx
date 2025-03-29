@@ -9,6 +9,7 @@ import SmallButton from '@/components/UI/Button/SmallButton';
 import {IStudent} from '@/libs/types/entities';
 
 interface PropTypes extends DefaultPropTypes, ViewStylePropTypes {
+  containerId: string
   handleDeleteFormShow: () => void
   handleEditChildClick: (data: IStudent) => void
   handleReRegistrationClick: (studentId: number) => void
